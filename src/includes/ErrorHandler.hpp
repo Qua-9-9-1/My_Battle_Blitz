@@ -8,5 +8,12 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 
-void ErrorHandler(void);
+#define TEXTURES_SIZE 3
+#define SOUNDS_SIZE 3
+#define MUSICS_SIZE 3
+#define FONTS_SIZE 3
+
+void errorHandler(void);

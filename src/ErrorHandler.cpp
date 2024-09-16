@@ -7,10 +7,26 @@
 
 #include "ErrorHandler.hpp"
 
-void ErrorHandler(void)
+const std::string textures[TEXTURES_SIZE] = {
+    "judge",
+    "parking",
+    "mario"
+};
+
+void errorHandler(void)
 {
-    if (0) {
-        std::cerr << "Error: An error occured" << std::endl;
-        exit(84);
+    std::ifstream file;
+    bool error = false;
+    std::string basePath = std::filesystem::current_path().string() + "/assets/sprites/";
+
+    for (int i = 0; i < TEXTURES_SIZE; i++) {
+        file.open(basePath + textures[i] + ".png");
+        if (!file) {
+            std::cerr << "Error: one or more textures are missing re-dowload it." << std::endl;
+            error = true;
+            break;
+        }
+        file.close();
     }
+    if (error) exit(1);
 }

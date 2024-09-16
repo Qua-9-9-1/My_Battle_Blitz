@@ -9,7 +9,7 @@ CXX := g++
 CXXFLAGS := -Isrc/includes -Iexternal/sol2/include -I/usr/include/lua5.4 -std=c++2a -Wall -Wextra -g3
 SRCS := $(shell find src -name '*.cpp') main.cpp
 OBJS := $(SRCS:.cpp=.o)
-SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system -lpthread
+SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lpthread
 LUA_SCRIPTS := $(shell find scripts -name '*.lua')
 LUA_LIBS := -llua5.4
 TARGET := my_MicroGames
