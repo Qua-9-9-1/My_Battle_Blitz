@@ -7,26 +7,70 @@
 
 #include "Renderer.hpp"
 
-
 namespace ware {
-    Sprite::Sprite(const std::string filePath)
+    Image::Image(const std::string filePath)
     {
         loadFile(filePath);
+    }
+
+    Image::~Image()
+    {
+    }
+
+    void Image::loadFile(const std::string filePath)
+    {
+        _image.loadFromFile(filePath);
+    }
+
+    void Image::colorize(sf::Color colorToReplace, sf::Color playerColor)
+    {
+        sf::Vector2u size = _image.getSize();
+
+        for (unsigned int x = 0; x < size.x; ++x) {
+            for (unsigned int y = 0; y < size.y; ++y) {
+                if (_image.getPixel(x, y) == colorToReplace) {
+                    _image.setPixel(x, y, playerColor);
+                }
+            }
+        }
+    }
+
+    void Image::setPlayerColor(sf::Color skinColor, sf::Color clothesColor)
+    {
+        colorize(sf::Color(234, 72, 234), skinColor);
+        colorize(sf::Color(181, 56, 181), darkenColor(skinColor, 150));
+        colorize(sf::Color(167, 255, 58), clothesColor);
+        colorize(sf::Color(132, 198, 45), darkenColor(clothesColor, 150));
+        colorize(sf::Color(208, 255, 147), lightenColor(clothesColor, 200));
+    }
+
+    void Image::setPlayer2Color(sf::Color skinColor, sf::Color clothesColor)
+    {
+        colorize(sf::Color(234, 72, 234), skinColor);
+        colorize(sf::Color(181, 56, 181), darkenColor(skinColor, 150));
+        colorize(sf::Color(167, 255, 58), clothesColor);
+        colorize(sf::Color(132, 198, 45), darkenColor(clothesColor, 150));
+        colorize(sf::Color(208, 255, 147), lightenColor(clothesColor, 200));
+    }
+
+    void Image::flipImage(bool horizontal, bool vertical)
+    {
+        if (horizontal) _image.flipHorizontally();
+        if (vertical) _image.flipVertically();
+    }
+
+    Sprite::Sprite(sf::Image image)
+    {
+        loadImage(image);
     }
 
     Sprite::~Sprite()
     {
     }
 
-    void Sprite::loadFile(const std::string filePath)
+    void Sprite::loadImage(sf::Image image)
     {
-        _image.loadFromFile(filePath);
-        reloadSprite();
-    }
-
-    void Sprite::reloadSprite()
-    {
-        _texture.loadFromImage(_image);
+        _texture.loadFromImage(image);
         _sprite.setTexture(_texture);
     }
 
@@ -63,29 +107,6 @@ namespace ware {
     void Sprite::setColor(sf::Color color)
     {
         _sprite.setColor(color);
-    }
-
-    void Sprite::colorize(sf::Color colorToReplace, sf::Color colorToApply)
-    {
-        sf::Vector2u size = _image.getSize();
-
-        for (unsigned int x = 0; x < size.x; ++x) {
-            for (unsigned int y = 0; y < size.y; ++y) {
-                if (_image.getPixel(x, y) == colorToReplace) {
-                    _image.setPixel(x, y, colorToApply);
-                }
-            }
-        }
-    }
-
-    void Sprite::setPlayerColor(sf::Color skinColor, sf::Color clothesColor)
-    {
-        colorize(sf::Color(234, 72, 234), skinColor);
-        colorize(sf::Color(181, 56, 181), skinColor); // with darker color
-        colorize(sf::Color(167, 255, 58), clothesColor);
-        colorize(sf::Color(132, 198, 45), clothesColor); // with darker color
-        colorize(sf::Color(208, 255, 147), clothesColor); // with lighter color
-        reloadSprite();
     }
 
     Text::Text(const std::string text, const std::string fontPath)
