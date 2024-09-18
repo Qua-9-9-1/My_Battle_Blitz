@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
-** arcade-microGames
-** File description:
-** Game
+** Quentin Duval 2024
+** Free Projects
+** GitHub: @Qua-9-9-1
+** Email:  quentduva@gmail.com
 */
 
 #pragma once
@@ -33,6 +33,7 @@ namespace ware {
             sf::View            _view2;
             bool                _separatedViews;
             LuaManager          _luaManager;
+            bool                _oneTimeArrows;
             Image _image;
             Sprite _sprite;
             Text _text;

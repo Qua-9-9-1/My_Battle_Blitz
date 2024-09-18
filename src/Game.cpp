@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
-** arcade-microGames
-** File description:
-** Game
+** Quentin Duval 2024
+** Free Projects
+** GitHub: @Qua-9-9-1
+** Email:  quentduva@gmail.com
 */
 
 #include "Game.hpp"
@@ -27,6 +27,7 @@ namespace ware {
         _sprite.setPosition(sf::Vector2f(0, 0));
         _sprite.setPosition(static_cast<sf::Vector2f>(_window.getSize()) / 2.f);
         _text.setPosition(sf::Vector2f(100, 100));
+        _oneTimeArrows = true;
     }
 
     Game::~Game()
@@ -38,34 +39,7 @@ namespace ware {
         _music.play();
 
         while (_window.isOpen()) {
-            while (_window.pollEvent(_event)) {
-                if (_event.type == sf::Event::Closed)
-                    _window.close();
-                if (_event.type == sf::Event::KeyPressed) {
-                    if (_event.key.code == sf::Keyboard::Escape)
-                        _window.close();
-                    if (_event.key.code == sf::Keyboard::Space) {
-                        _sound.play();
-                    }
-                    if (_event.key.code == sf::Keyboard::A) {
-                        _sprite.disappear();
-                        _text.disappear();
-                        _sound.setVolume(10);
-                    }
-                    if (_event.key.code == sf::Keyboard::B) {
-                        _text.setColor(sf::Color::Red);
-                        _image.setPlayerColor(sf::Color::Red, sf::Color::Blue);
-                        _image.flipImage(true, true);
-                        _sprite.loadImage(_image.getImage());
-                    }
-                    if (_event.key.code == sf::Keyboard::C) {
-                        separateViews();
-                    }
-                    if (_event.key.code == sf::Keyboard::D) {
-                        unifyViews();
-                    }
-                }
-            }
+            handleEvents(_oneTimeArrows);
             _deltaTime = _clock.restart().asSeconds();
             _window.clear(sf::Color(40, 40, 0));
             if (_separatedViews) {
@@ -97,6 +71,12 @@ namespace ware {
                 if (_event.key.code == sf::Keyboard::Space) {
 
                 }
+                if (_event.key.code == sf::Keyboard::C) {
+                    _sound.play();
+                }
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                std::cout << "Touche Gauche maintenue enfoncée!" << std::endl;
             }
         }
 

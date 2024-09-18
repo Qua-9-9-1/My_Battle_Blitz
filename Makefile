@@ -1,9 +1,9 @@
-##
-## EPITECH PROJECT, 2024
-## arcade-microGames
-## File description:
-## Makefile
-##
+#/
+## Quentin Duval 2024
+## Free Projects
+## GitHub: @Qua-9-9-1
+## Email:  quentduva@gmail.com
+#\
 
 CXX := g++
 CXXFLAGS := -Isrc/includes -Iexternal/sol2/include -I/usr/include/lua5.4 -std=c++2a -Wall -Wextra -g3

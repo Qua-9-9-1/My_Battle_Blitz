@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
-** arcade-microGames
-** File description:
-** GameSet
+** Quentin Duval 2024
+** Free Projects
+** GitHub: @Qua-9-9-1
+** Email:  quentduva@gmail.com
 */
 
 #include "GameSet.hpp"

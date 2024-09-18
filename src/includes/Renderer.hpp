@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2024
-** arcade-microGames
-** File description:
-** Renderer
+** Quentin Duval 2024
+** Free Projects
+** GitHub: @Qua-9-9-1
+** Email:  quentduva@gmail.com
 */
 
 #pragma once
