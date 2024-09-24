@@ -43,17 +43,28 @@ function init()
     if not miniGame.music then
         return false;
     end
+    miniGame.exit_button = Button.new("QUIT", "assets/font/Mario-Kart-DS.ttf", 200, 200);
+    if not miniGame.exit_button then
+        return false;
+    end
+    miniGame.exit_button:setSize(50);
+    miniGame.exit_button:setPadding(30, 30);
+    miniGame.exit_button:setColor(0, 0, 0, 255);
+    miniGame.exit_button:setBorderColor(220, 0, 0, 255);
+    miniGame.exit_button:setTextColor(220, 0, 0, 255);
     miniGame.sprite:setPosition(300, 100);
     miniGame.sprite:setScale(2, 2);
     miniGame.text:setPosition(0, 0);
+    miniGame.music:play();
     miniGame.music:setReplayPoint(6);
-    -- miniGame.music:play();
     return true;
 end
 
 function update(window, deltaTime)
     miniGame.sprite:update(window);
     miniGame.music:update(window);
+    miniGame.exit_button:update(window);
+    miniGame.exit_button:rotate(1);
 end
 
 function on_P1_left()

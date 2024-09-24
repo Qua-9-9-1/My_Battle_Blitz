@@ -17,6 +17,12 @@ namespace ware {
         public:
             LuaManager();
             ~LuaManager();
+            void loadImageClass();
+            void loadSpriteClass();
+            void loadTextClass();
+            void loadButtonClass();
+            void loadSoundClass();
+            void loadMusicClass();
             bool loadScript(const std::string& scriptPath);
             void unloadScript();
             sol::table getGlobalTable();
