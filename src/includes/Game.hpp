@@ -7,12 +7,9 @@
 
 #pragma once
 
-#include "LuaManager.hpp"
-
-#include "Renderer.hpp"
-#include "Audio.hpp"
-
 #include <SFML/Graphics.hpp>
+#include "LuaManager.hpp"
+#include "View.hpp"
 
 namespace ware {
     class Game {
@@ -28,9 +25,9 @@ namespace ware {
             sf::RenderWindow                                _window;
             sf::Event                                       _event;
             float                                           _deltaTime;
-            sf::Clock                                       _clock;          
-            sf::View            _view1;
-            sf::View                 _view2;
+            sf::Clock                                       _clock;
+            View                                            _view1;
+            View                                            _view2;      
             bool                                            _isMinigameRunning;
             bool                                            _oneTimeArrows;
             std::shared_ptr<LuaManager>                     _luaManager;

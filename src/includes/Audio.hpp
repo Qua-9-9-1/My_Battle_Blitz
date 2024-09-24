@@ -19,7 +19,7 @@ namespace ware {
             virtual void loadFile(const std::string filePath) = 0;
             virtual void setVolume(float volume) = 0;
             virtual void setPitch(float pitch) = 0;
-            void update(sf::RenderWindow& window) override;
+            void update(sf::RenderWindow& window) override = 0;
 
         protected:
             bool _isPlaying;
@@ -29,6 +29,7 @@ namespace ware {
         public:
             Sound(const std::string filePath);
             ~Sound();
+            void update(sf::RenderWindow& window) override;
             void play() override;
             void stop() override;
             void loadFile(const std::string filePath) override;

@@ -7,12 +7,13 @@ namespace ware {
             View();
             ~View();
             void update(sf::RenderWindow& window);
-            void setPosition(sf::Vector2f pos);
-            void setScale(sf::Vector2f scale);
+            sf::View getView() { return _view; }
+            void setPosition(float x, float y);
+            void setScale(float x, float y);
             void setRotation(float angle);
-            void setViewport(sf::FloatRect viewport);
-            void setSize(sf::Vector2f size);
-            void setCenter(sf::Vector2f center);
+            void setViewport(float x, float y, float width, float height);
+            void setSize(float x, float y);
+            void setCenter(float x, float y);
         private:
             sf::View _view;
     };

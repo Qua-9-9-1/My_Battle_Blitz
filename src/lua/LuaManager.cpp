@@ -81,6 +81,7 @@ namespace ware {
         _luaState.new_usertype<Music>("Music",
             sol::constructors<Music(const std::string&)>(),
             "loadFile", &Music::loadFile,
+            "update", &Music::update,
             "play", &Music::play,
             "replay", &Music::replay,
             "stop", &Music::stop,
@@ -97,7 +98,7 @@ namespace ware {
 
     bool LuaManager::loadScript(const std::string& scriptPath)
     {
-        sol::load_result script = _luaState.load_file(std::filesystem::current_path().string() + scriptPath);
+        sol::load_result script = _luaState.load_file(scriptPath);
 
         if (!script.valid()) {
             sol::error error = script;

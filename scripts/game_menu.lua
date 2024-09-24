@@ -10,12 +10,12 @@ local miniGame = {
     sprite = nil;
     text = nil;
     sound = nil;
-    music = nil;
     freeplay_button = nil;
     showdown_button = nil;
     settings_button = nil;
     exit_button = nil;
     controls_button = nil;
+    credits_button = nil;
     music = nil;
     cursor = nil;
     select = nil;
@@ -23,7 +23,7 @@ local miniGame = {
 };
 
 function init()
-    miniGame.image = Image.new("assets/sprites/sticks.png");
+    miniGame.image = Image.new("assets/sprites/game_logo.png");
     if not miniGame.image then
         return false;
     end
@@ -43,16 +43,17 @@ function init()
     if not miniGame.music then
         return false;
     end
-    miniGame.sprite:setPosition(0, 0);
+    miniGame.sprite:setPosition(300, 100);
+    miniGame.sprite:setScale(2, 2);
     miniGame.text:setPosition(0, 0);
     miniGame.music:setReplayPoint(6);
-    miniGame.music:play();
+    -- miniGame.music:play();
     return true;
 end
 
 function update(window, deltaTime)
-    miniGame.music.update(window);
     miniGame.sprite:update(window);
+    miniGame.music:update(window);
 end
 
 function on_P1_left()

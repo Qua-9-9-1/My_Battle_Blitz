@@ -1,10 +1,11 @@
 #include "Audio.hpp"
-
+#include <iostream>
 namespace ware {
     Music::Music(const std::string filePath)
     {
         loadFile(filePath);
         _replayPoint = sf::seconds(0);
+        _music.setLoop(false);
     }
 
     Music::~Music()
@@ -63,10 +64,5 @@ namespace ware {
     void Music::setLoop(bool loop)
     {
         _music.setLoop(loop);
-    }
-
-    void AAudio::update(sf::RenderWindow& window)
-    {
-        (void)window;
     }
 }

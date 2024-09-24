@@ -7,8 +7,7 @@ namespace ware {
     }
 
     View::~View()
-    {
-        
+    {   
     }
 
     void View::update(sf::RenderWindow& window)
@@ -16,14 +15,14 @@ namespace ware {
         (void)window;
     }
 
-    void View::setPosition(sf::Vector2f pos)
+    void View::setPosition(float x, float y)
     {
-        _view.setCenter(pos);
+        _view.setCenter(x, y);
     }
 
-    void View::setScale(sf::Vector2f scale)
+    void View::setScale(float x, float y)
     {
-        _view.setSize(scale);
+        _view.setSize(x, y);
     }
 
     void View::setRotation(float angle)
@@ -31,18 +30,18 @@ namespace ware {
         _view.setRotation(angle);
     }
 
-    void View::setViewport(sf::FloatRect viewport)
+    void View::setViewport(float x, float y, float width, float height)
     {
-        _view.setViewport(viewport);
+        _view.setViewport(sf::FloatRect(x, y, width, height));
     }
 
-    void View::setSize(sf::Vector2f size)
+    void View::setSize(float x, float y)
     {
-        _view.setSize(size);
+        _view.setSize(x, y);
     }
 
-    void View::setCenter(sf::Vector2f center)
+    void View::setCenter(float x, float y)
     {
-        _view.setCenter(center);
+        _view.setCenter(x, y);
     }
 }

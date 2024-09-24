@@ -6,14 +6,16 @@
 */
 
 #include "Game.hpp"
-#include <filesystem>
 
+#include "Audio.hpp"
 namespace ware {
     Game::Game():
     _clock(),
-    _view1(sf::FloatRect(0, 0, 800, 600)),
-    _view2(sf::FloatRect(0, 0, 800, 600))
+    _view1(),
+    _view2()
     {
+        _view1.setSize(800, 600);
+        _view1.setCenter(400, 300);
         _window.create(sf::VideoMode(800, 600), "my_MicroGames");
         _window.setFramerateLimit(60);
         _deltaTime = 0;
@@ -35,7 +37,9 @@ namespace ware {
             handleEvents();
             _deltaTime = _clock.restart().asSeconds();
             _window.clear(sf::Color(40, 40, 0));
+            _window.setView(_view1.getView());
             _luaFunctions["update"](_window, _deltaTime);
+            // _sprite.update(_window);
             // if (_separatedViews) {
             //     _window.setView(_view1);
             //     // appeller la fonction du code lua pour update p1
@@ -138,7 +142,7 @@ namespace ware {
         };
 
         _luaFunctions.clear();
-        _luaManager->loadScript("/scripts/" + minigameName + ".lua");
+        _luaManager->loadScript("scripts/" + minigameName + ".lua");
         _luaFunctions["init"] = _luaManager->getFunction("init");
         if (!_luaFunctions["init"].valid()) {
             std::cerr << "Failed to get Lua function init" << std::endl;

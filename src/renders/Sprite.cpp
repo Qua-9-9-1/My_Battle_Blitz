@@ -1,5 +1,6 @@
 #include "Renderer.hpp"
 
+#include <iostream>
 namespace ware {
  
     Sprite::Sprite(sf::Image image)
@@ -7,6 +8,7 @@ namespace ware {
         loadImage(image);
         _sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
         setPosition(0, 0);
+        setColor(sf::Color::White);
     }
 
     Sprite::~Sprite()

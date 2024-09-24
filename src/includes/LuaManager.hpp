@@ -9,7 +9,6 @@
 
 #include <sol/sol.hpp>
 #include "LuaManager.hpp"
-#include <filesystem>
 #include "Renderer.hpp"
 #include "Audio.hpp"
 
