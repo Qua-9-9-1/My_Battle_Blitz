@@ -9,6 +9,9 @@
 
 #include <sol/sol.hpp>
 #include "LuaManager.hpp"
+#include <filesystem>
+#include "Renderer.hpp"
+#include "Audio.hpp"
 
 namespace ware {
     class LuaManager {
@@ -16,6 +19,7 @@ namespace ware {
             LuaManager();
             ~LuaManager();
             bool loadScript(const std::string& scriptPath);
+            void unloadScript();
             sol::table getGlobalTable();
             sol::table getTable(const std::string& tableName);
             sol::function getFunction(const std::string& functionName);

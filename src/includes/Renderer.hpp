@@ -11,15 +11,17 @@
 #include "IObject.hpp"
 #include "utils.hpp"
 
+#include <iostream>
+
 namespace ware {
     class ARenderer : public IObject {
         public:
             ARenderer() = default;
             ~ARenderer() = default;
-            void update(sf::RenderWindow& window, float deltaTime) = 0;
+            void update(sf::RenderWindow& window) = 0;
             virtual void disappear() = 0;
-            virtual void setPosition(sf::Vector2f pos) = 0;
-            virtual void setScale(sf::Vector2f scale) = 0;
+            virtual void setPosition(float x, float y) = 0;
+            virtual void setScale(float x, float y) = 0;
             virtual void setRotation(float angle) = 0;
     };
 
@@ -41,14 +43,16 @@ namespace ware {
         public:
             Sprite(sf::Image image);
             ~Sprite();
-            void update(sf::RenderWindow& window, float deltaTime) override;
+            void update(sf::RenderWindow& window) override;
             void loadImage(sf::Image image);
             void reloadSprite();
             void disappear() override;
-            void setPosition(sf::Vector2f pos) override;
-            void setScale(sf::Vector2f scale) override;
+            void setPosition(float x, float y) override;
+            void move(float x, float y);
+            void setScale(float x, float y) override;
             void setRotation(float angle) override;
-            void setTextureRect(sf::Vector2f start_pos, int width, int height);
+            void rotate(float angle);
+            void setTextureRect(int start_x, int start_y, int width, int height);
             void setColor(sf::Color color);
             void setPlayerColor(sf::Color skinColor, sf::Color clothesColor);
         private:
@@ -60,12 +64,14 @@ namespace ware {
         public:
             Text(const std::string text, const std::string fontPath);
             ~Text();
-            void update(sf::RenderWindow& window, float deltaTime) override;
+            void update(sf::RenderWindow& window) override;
             void loadFile(const std::string filePath);
             void disappear() override;
-            void setPosition(sf::Vector2f pos) override;
-            void setScale(sf::Vector2f scale) override;
+            void setPosition(float x, float y) override;
+            void move(float x, float y);
+            void setScale(float x, float y) override;
             void setRotation(float angle) override;
+            void rotate(float angle);
             void setColor(sf::Color color);
             void setBorderColor(sf::Color color);
             void setString(const std::string text);
@@ -74,4 +80,41 @@ namespace ware {
             sf::Text _text;
             sf::Font _font;
     };
+
+    // class Button : public ARenderer {
+    //     public:
+    //         Button(const std::string text, const std::string fontPath);
+    //         ~Button();
+    //         void update(sf::RenderWindow& window) override;
+    //         void loadFile(const std::string filePath);
+    //         void disappear() override;
+    //         void setPosition(sf::Vector2f pos) override;
+    //         void setScale(sf::Vector2f scale) override;
+    //         void setRotation(float angle) override;
+    //         void setColor(sf::Color color);
+    //         void setBorderColor(sf::Color color);
+    //         void setString(const std::string text);
+    //         void setCharacterSize(int size);
+    //         void setButtonColor(sf::Color color);
+    //         void setButtonBorderColor(sf::Color color);
+    //         void setButtonSize(sf::Vector2f size);
+    //         void setButtonPosition(sf::Vector2f pos);
+    //         void setButtonScale(sf::Vector2f scale);
+    //         void setButtonRotation(float angle);
+    //         void setButtonTexture(sf::Image image);
+    //         void setButtonTextureRect(sf::Vector2f start_pos, int width, int height);
+    //         void setButtonColorize(sf::Color colorToReplace, sf::Color playerColor);
+    //         void setButtonPlayerColor(sf::Color skinColor, sf::Color clothesColor);
+    //         void setButtonPlayer2Color(sf::Color skinColor, sf::Color clothesColor);
+    //         void setButtonFlipImage(bool horizontal, bool vertical);
+    //     private:
+    //         sf::Text _text;
+    //         sf::Font _font;
+    //         sf::RectangleShape _button;
+    //         sf::Texture _buttonTexture;
+    //         sf::Color _buttonColor;
+    //         sf::Color _buttonBorderColor;
+    //         sf::Color _selectedColor;
+    //         sf::Color _selectedBorderColor;
+    // };
 }

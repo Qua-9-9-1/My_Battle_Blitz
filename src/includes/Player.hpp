@@ -14,7 +14,7 @@ namespace ware {
         public:
             Player();
             ~Player();
-            void update(sf::RenderWindow& window, float deltaTime);
+            void update(sf::RenderWindow& window);
             sf::Color getSkinColor() { return _skinColor; }
             sf::Color getClothesColor() { return _clothesColor; }
             int getScore() { return _score; }
