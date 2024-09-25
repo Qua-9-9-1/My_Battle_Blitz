@@ -27,7 +27,8 @@ namespace ware {
             "setRotation", &Sprite::setRotation,
             "rotate", &Sprite::rotate,
             "setTextureRect", &Sprite::setTextureRect,
-            "setColor", &Sprite::setColor
+            "setColor", &Sprite::setColor,
+            "flip", &Sprite::flip
         );
     }
 

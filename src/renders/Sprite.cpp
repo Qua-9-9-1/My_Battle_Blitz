@@ -1,6 +1,5 @@
 #include "Renderer.hpp"
 
-#include <iostream>
 namespace ware {
  
     Sprite::Sprite(sf::Image image)
@@ -9,6 +8,7 @@ namespace ware {
         _sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
         setPosition(0, 0);
         setColor(sf::Color::White);
+        _flipped = false;
     }
 
     Sprite::~Sprite()
@@ -64,5 +64,19 @@ namespace ware {
     void Sprite::setColor(sf::Color color)
     {
         _sprite.setColor(color);
-    }   
+    }
+
+    void Sprite::flip(bool invert)
+    {
+        sf::IntRect rect = _sprite.getTextureRect();
+
+        if (_flipped) {
+            rect.width = -rect.width;
+            _flipped = false;
+        } else {
+            rect.width = abs(rect.width);
+            _flipped = true;
+        }
+        _sprite.setTextureRect(rect);
+    }
 }

@@ -14,10 +14,10 @@ namespace ware {
     _view1(),
     _view2()
     {
-        _view1.setSize(800, 600);
-        _view1.setCenter(400, 300);
-        _window.create(sf::VideoMode(800, 600), "my_MicroGames");
+        _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames");
         _window.setFramerateLimit(60);
+        _view1.setSize(_window.getSize().x, _window.getSize().y);
+        _view1.setCenter(_window.getSize().x / 2.f, _window.getSize().y / 2.f);
         _deltaTime = 0;
         _isMinigameRunning = false;
         _oneTimeArrows = true;
@@ -63,6 +63,8 @@ namespace ware {
             if (_event.type == sf::Event::Closed
             || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 _window.close();
+            if (_event.type == sf::Event::Resized)
+                resizeViews(_event.size.width, _event.size.height);
             if (_event.type == sf::Event::KeyPressed) {
                 if (_event.key.code == sf::Keyboard::C) {
                     doInput("onP1_1");
@@ -125,5 +127,17 @@ namespace ware {
     void Game::setOneTimeArrows(bool oneTimeArrows)
     {
         _oneTimeArrows = oneTimeArrows;
+    }
+
+    void Game::resizeViews(int width, int height)
+    {
+        float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+
+        if (aspectRatio > 1.0f) {
+            _view1.setSize(WINDOW_WIDTH * aspectRatio, WINDOW_HEIGHT);
+        } else {
+            _view1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT / aspectRatio);
+        }
+        _view1.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
     }
 }

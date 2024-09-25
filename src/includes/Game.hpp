@@ -11,6 +11,9 @@
 #include "LuaManager.hpp"
 #include "View.hpp"
 
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
 namespace ware {
     class Game {
         public:
@@ -26,6 +29,7 @@ namespace ware {
             void separateViews();
             void unifyViews();
             void doInput(const std::string& input);
+            void resizeViews(int width, int height);
         private:
             sf::RenderWindow                                _window;
             sf::Event                                       _event;

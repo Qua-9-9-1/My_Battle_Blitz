@@ -55,9 +55,11 @@ namespace ware {
             void setTextureRect(int start_x, int start_y, int width, int height);
             void setColor(sf::Color color);
             void setPlayerColor(sf::Color skinColor, sf::Color clothesColor);
+            void flip(bool invert);
         private:
-            sf::Sprite _sprite;
+            sf::Sprite  _sprite;
             sf::Texture _texture;
+            bool        _flipped;
     };
 
     class Text : public ARenderer {
