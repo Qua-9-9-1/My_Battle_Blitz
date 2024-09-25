@@ -19,8 +19,13 @@ namespace ware {
             void run();
             void handleEvents();
             void setOneTimeArrows(bool oneTimeArrows);
+            void launchMenu();
             void startMinigame(const std::string minigameName);
             int loadMinigame(const std::string minigameName);
+            void stopMinigame();
+            void separateViews();
+            void unifyViews();
+            void doInput(const std::string& input);
         private:
             sf::RenderWindow                                _window;
             sf::Event                                       _event;
@@ -30,6 +35,7 @@ namespace ware {
             View                                            _view2;      
             bool                                            _isMinigameRunning;
             bool                                            _oneTimeArrows;
+            bool                                            _separatedViews;
             std::shared_ptr<LuaManager>                     _luaManager;
             std::unordered_map<std::string, sol::function> _luaFunctions;
             std::shared_ptr<LuaManager>                    _luaMenuManager;
