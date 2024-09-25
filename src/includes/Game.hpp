@@ -21,6 +21,8 @@ namespace ware {
             ~Game();
             void run();
             void handleEvents();
+            void handleOneTimeKeys();
+            void handleMutipleTimeKeys();
             void setOneTimeArrows(bool oneTimeArrows);
             void launchMenu();
             void startMinigame(const std::string minigameName);
@@ -39,6 +41,8 @@ namespace ware {
             View                                            _view2;      
             bool                                            _isMinigameRunning;
             bool                                            _oneTimeArrows;
+            bool                                            _oneTimeButtons;
+            bool                                            _pause;
             bool                                            _separatedViews;
             std::shared_ptr<LuaManager>                     _luaManager;
             std::unordered_map<std::string, sol::function> _luaFunctions;

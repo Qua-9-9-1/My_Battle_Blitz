@@ -66,14 +66,14 @@ namespace ware {
         _sprite.setColor(color);
     }
 
-    void Sprite::flip(bool invert)
+    void Sprite::flip(bool left)
     {
         sf::IntRect rect = _sprite.getTextureRect();
 
-        if (_flipped) {
+        if (_flipped && left) {
             rect.width = -rect.width;
             _flipped = false;
-        } else {
+        } else if (!_flipped && !left) {
             rect.width = abs(rect.width);
             _flipped = true;
         }

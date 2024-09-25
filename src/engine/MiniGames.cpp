@@ -7,7 +7,7 @@ namespace ware {
         std::vector<std::string> requiredFunctions = {
             "update", "onP1Left", "onP1Right", "onP1Up", "onP1Down",
             "onP2Left", "onP2Right", "onP2Up", "onP2Down", "onP1_1", "onP1_2",
-            "onP1_3", "onP2_1", "onP2_2", "onP2_3"
+            "onP1_3", "onP2_1", "onP2_2", "onP2_3", "onP1Start", "onP2Start"
         };
 
         _luaMenuFunctions.clear();
@@ -43,6 +43,8 @@ namespace ware {
         _luaMenuFunctions["onP2_1"] = _luaMenuManager->getFunction("on_P2_1");
         _luaMenuFunctions["onP2_2"] = _luaMenuManager->getFunction("on_P2_2");
         _luaMenuFunctions["onP2_3"] = _luaMenuManager->getFunction("on_P2_3");
+        _luaMenuFunctions["onP1Start"] = _luaMenuManager->getFunction("on_P1_start");
+        _luaMenuFunctions["onP2Start"] = _luaMenuManager->getFunction("on_P2_start");
         for (const auto& func : requiredFunctions)
             if (!_luaMenuFunctions[func].valid())
                 exit(1);
@@ -111,14 +113,5 @@ namespace ware {
         _luaManager->unloadScript();
         _isMinigameRunning = false;
         unifyViews();
-    }
-
-    void Game::doInput(const std::string& input)
-    {
-        if (_isMinigameRunning) {
-            _luaFunctions[input]();
-        } else {
-            _luaMenuFunctions[input]();
-        }
     }
 }

@@ -21,6 +21,8 @@ namespace ware {
         _deltaTime = 0;
         _isMinigameRunning = false;
         _oneTimeArrows = true;
+        _oneTimeButtons = true;
+        _pause = false;
         _separatedViews = false;
         _window.setKeyRepeatEnabled(false);
         _luaManager = std::make_shared<LuaManager>();
@@ -54,73 +56,6 @@ namespace ware {
                 }
             }
             _window.display();
-        }
-    }
-
-    void Game::handleEvents()
-    {
-        while (_window.pollEvent(_event)) {
-            if (_event.type == sf::Event::Closed
-            || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                _window.close();
-            if (_event.type == sf::Event::Resized)
-                resizeViews(_event.size.width, _event.size.height);
-            if (_event.type == sf::Event::KeyPressed) {
-                if (_event.key.code == sf::Keyboard::C) {
-                    doInput("onP1_1");
-                }
-                if (_event.key.code == sf::Keyboard::V) {
-                    doInput("onP1_2");
-                }
-                if (_event.key.code == sf::Keyboard::B) {
-                    doInput("onP1_3");
-                }
-                if (_event.key.code == sf::Keyboard::Numpad1) {
-                    doInput("onP2_1");
-                }
-                if (_event.key.code == sf::Keyboard::Numpad2) {
-                    doInput("onP2_2");
-                }
-                if (_event.key.code == sf::Keyboard::Numpad3) {
-                    doInput("onP2_3");
-                }
-                if (_oneTimeArrows) {
-                    if (_event.key.code == sf::Keyboard::Z)
-                        doInput("onP1Up");
-                    if (_event.key.code == sf::Keyboard::S)
-                        doInput("onP1Down");
-                    if (_event.key.code == sf::Keyboard::D)
-                        doInput("onP1Right");
-                    if (_event.key.code == sf::Keyboard::Q)
-                        doInput("onP1Left");
-                    if (_event.key.code == sf::Keyboard::Up)
-                        doInput("onP2Up");
-                    if (_event.key.code == sf::Keyboard::Down)
-                        doInput("onP2Down");
-                    if (_event.key.code == sf::Keyboard::Right)
-                        doInput("onP2Right");
-                    if (_event.key.code == sf::Keyboard::Left)
-                        doInput("onP2Left");
-                }
-            }
-        }
-        if (!_oneTimeArrows) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-                doInput("onP1Up");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                doInput("onP1Down");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                doInput("onP1Right");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-                doInput("onP1Left");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                doInput("onP2Up");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                doInput("onP2Down");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                doInput("onP2Right");
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                doInput("onP2Left");
         }
     }
 
