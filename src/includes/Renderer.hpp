@@ -89,6 +89,7 @@ namespace ware {
             ~Button();
             void update(sf::RenderWindow& window) override;
             void disappear() override;
+            void setCentered();
             void setPosition(float x, float y) override;
             void move(float x, float y);
             void setScale(float x, float y) override;

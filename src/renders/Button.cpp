@@ -15,6 +15,7 @@ namespace ware {
         _button.setOutlineColor(sf::Color::Black);
         _button.setOutlineThickness(2);
         centerText();
+        setCentered();
         setPosition(x, y);
     }
 
@@ -35,9 +36,16 @@ namespace ware {
         _button.setOutlineColor(sf::Color::Transparent);
     }
 
+    void Button::setCentered()
+    {
+        _text.setOrigin(_text.getLocalBounds().width / 2.0f, _text.getLocalBounds().height / 2.0f);
+        _button.setOrigin(_button.getLocalBounds().width / 2.0f, _button.getLocalBounds().height / 2.0f);
+    }
+
     void Button::setPosition(float x, float y)
     {
         _button.setPosition(x, y);
+        setCentered();
         centerText();
     }
 
@@ -51,6 +59,8 @@ namespace ware {
     {
         _text.setScale(x, y);
         _button.setScale(x, y);
+        setCentered();
+        centerText();
     }
 
     void Button::setRotation(float angle)
@@ -84,6 +94,7 @@ namespace ware {
     {
         _text.setString(text);
         _button.setSize(sf::Vector2f(_text.getLocalBounds().width, _text.getLocalBounds().height));
+        setCentered();
         centerText();
     }
 
@@ -93,6 +104,7 @@ namespace ware {
         _text.setCharacterSize(_size);
         _button.setSize(sf::Vector2f(_text.getLocalBounds().width, _text.getLocalBounds().height));
         setPadding(_padding.x, _padding.y);
+        setCentered();
         centerText();
     }
 
@@ -100,6 +112,7 @@ namespace ware {
     {
         _padding = {x, y};
         _button.setSize(sf::Vector2f(_text.getLocalBounds().width + x, _text.getLocalBounds().height + y));
+        setCentered();
         centerText();
     }
 

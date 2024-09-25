@@ -23,7 +23,8 @@ namespace ware {
             void handleEvents();
             void handleOneTimeKeys();
             void handleMutipleTimeKeys();
-            void setOneTimeArrows(bool oneTimeArrows);
+            void setOneTimeArrows(bool oneTimeArrows) { _oneTimeArrows = oneTimeArrows; }
+            void setOneTimeButtons(bool oneTimeButtons) { _oneTimeButtons = oneTimeButtons; }
             void launchMenu();
             void startMinigame(const std::string minigameName);
             int loadMinigame(const std::string minigameName);

@@ -11,7 +11,7 @@ namespace ware {
         };
 
         _luaMenuFunctions.clear();
-        _luaMenuManager->loadScript("scripts/game_menu.lua");
+        _luaMenuManager->loadScript("scripts/game_menu/menu.lua");
         _luaMenuFunctions["init"] = _luaMenuManager->getFunction("init");
         if (!_luaMenuFunctions["init"].valid()) {
             std::cerr << "Failed to get Lua function init" << std::endl;
@@ -71,6 +71,7 @@ namespace ware {
         _luaFunctions.clear();
         _luaManager->loadScript("scripts/" + minigameName + ".lua");
         _luaFunctions["init"] = _luaManager->getFunction("init");
+        //pas besoin de l'enregistrer, donner en paramètres afficher règles
         if (!_luaFunctions["init"].valid()) {
             std::cerr << "Failed to get Lua function init" << std::endl;
             return 1;
