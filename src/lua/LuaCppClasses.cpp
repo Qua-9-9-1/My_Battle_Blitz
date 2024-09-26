@@ -116,7 +116,8 @@ namespace ware {
             "setScale", &ScrollingBackground::setScale,
             "setSpriteRect", &ScrollingBackground::setSpriteRect,
             "setRotation", &ScrollingBackground::setRotation,
-            "setSpeed", &ScrollingBackground::setSpeed
+            "setSpeed", &ScrollingBackground::setSpeed,
+            "setDirection", &ScrollingBackground::setDirection
         );
 
         _luaState.new_usertype<ImageBackground>("ImageBackground",

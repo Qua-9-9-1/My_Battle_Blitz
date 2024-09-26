@@ -43,21 +43,26 @@ namespace ware {
         _texture.loadFromFile(filePath);
         _texture.setSmooth(true);
         _texture.setRepeated(true);
-        _sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT));
+        _sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2));
         _sprite.setTexture(_texture);
-        setPosition(0, 0);
         _rect = _sprite.getTextureRect();
-        _speed = 1;
-        _angle = 45;
+        setSpeed(1);
+        setDirection(45);
     }
 
     void ScrollingBackground::update(sf::RenderWindow& window)
     {
         _sprite.move(_speed * cos(_angle), _speed * sin(_angle));
-        if (_sprite.getPosition().x >= (_texture.getSize().x * cos(_angle))
-        && _sprite.getPosition().y >= (_texture.getSize().y * sin(_angle))) {
-            _sprite.setPosition(0, 0);
-        }
+        sf::Vector2f position = _sprite.getPosition();
+        position.x += WINDOW_WIDTH;
+        position.y += WINDOW_HEIGHT;
+        float textureWidth = _texture.getSize().x;
+        float textureHeight = _texture.getSize().y;
+
+        if (position.x <= -textureWidth || position.x >= textureWidth)
+            reinitPosition(true, false);
+        if (position.y <= -textureHeight || position.y >= textureHeight)
+            reinitPosition(false, true);
         window.draw(_sprite);
     }
 
@@ -69,18 +74,25 @@ namespace ware {
     void ScrollingBackground::setSize(float x, float y)
     {
         _sprite.setScale(x, y);
-        setPosition(0, 0);
+        reinitPosition(true, true);
     }
 
     void ScrollingBackground::setScale(float x, float y)
     {
         _sprite.setScale(x, y);
-        setPosition(0, 0);
+        reinitPosition(true, true);
     }
 
     void ScrollingBackground::setRotation(float angle)
     {
         _sprite.setRotation(angle);
+    }
+
+    void ScrollingBackground::reinitPosition(bool horizontal, bool vertical)
+    {
+        setPosition(
+            horizontal ? -WINDOW_WIDTH : _sprite.getPosition().x,
+            vertical ? -WINDOW_HEIGHT : _sprite.getPosition().y);
     }
 
     void ScrollingBackground::setSpriteRect(int posX, int posY, int sizeX, int sizeY)
@@ -95,13 +107,13 @@ namespace ware {
     void ScrollingBackground::setSpeed(float speed)
     {
         _speed = speed;
-        setPosition(0, 0);
+        reinitPosition(true, true);
     }
 
     void ScrollingBackground::setDirection(float angle)
     {
-        _angle = angle;
-        setPosition(0, 0);
+        _angle = angle * (M_PI / 180);
+        reinitPosition(true, true);
     }
 
     ImageBackground::ImageBackground(const std::string& filePath)

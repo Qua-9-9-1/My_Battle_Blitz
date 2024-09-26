@@ -84,7 +84,7 @@ function init()
     miniGame.background = ScrollingBackground.new("assets/sprites/game_logo.png");
     buttons_init();
     miniGame.sprite:setPosition(400, 400);
-    miniGame.music:play();
+    --miniGame.music:play();
     miniGame.music:setReplayPoint(6);
     return true;
 end
@@ -100,7 +100,7 @@ function update(window, deltaTime)
     miniGame.background:update(window);
     miniGame.sprite:update(window);
     miniGame.sprite:rotate(0.1);
-    miniGame.music:update(window);
+    --miniGame.music:update(window);
     miniGame.showdown_button:update(window);
     miniGame.freeplay_button:update(window);
     miniGame.controls_button:update(window);

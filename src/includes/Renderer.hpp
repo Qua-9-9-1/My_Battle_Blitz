@@ -136,7 +136,7 @@ namespace ware {
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
             void setRotation(float angle) override;
-            void setColor(const sf::Color& color);
+            void setColor(float r, float g, float b, float a);
         private:
             sf::RectangleShape _shape;
     };
@@ -149,10 +149,10 @@ namespace ware {
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
             void setRotation(float angle) override;
+            void reinitPosition(bool horizonal, bool vertical);
             void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
             void setSpeed(float speed);
             void setDirection(float angle);
-
         private:
             sf::Texture _texture;
             sf::Sprite _sprite;
@@ -171,7 +171,6 @@ namespace ware {
             void setScale(float x, float y) override;
             void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
             void setRotation(float angle) override;
-
         private:
             sf::Texture _texture;
             sf::Sprite _sprite;
@@ -188,7 +187,6 @@ namespace ware {
             void setRotation(float angle) override;
             void setSpeeds(float Xspeed, float Yspeed);
             void setDirection(float angle);
-
         private:
             int _selected_sprite;
             std::vector<sf::Texture> _textures;
