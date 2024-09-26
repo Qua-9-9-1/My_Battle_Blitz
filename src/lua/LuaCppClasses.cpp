@@ -95,4 +95,48 @@ namespace ware {
             "setReplayPoint", &Music::setReplayPoint
         );
     }
+
+    void LuaManager::loadBackgroundClasses()
+    {
+        _luaState.new_usertype<SolidColorBackground>("SolidColorBackground",
+            sol::constructors<SolidColorBackground(float, float, float, float)>(),
+            "update", &SolidColorBackground::update,
+            "setPosition", &SolidColorBackground::setPosition,
+            "setSize", &SolidColorBackground::setSize,
+            "setScale", &SolidColorBackground::setScale,
+            "setRotation", &SolidColorBackground::setRotation,
+            "setColor", &SolidColorBackground::setColor
+        );
+
+        _luaState.new_usertype<ScrollingBackground>("ScrollingBackground",
+            sol::constructors<ScrollingBackground(const std::string&)>(),
+            "update", &ScrollingBackground::update,
+            "setPosition", &ScrollingBackground::setPosition,
+            "setSize", &ScrollingBackground::setSize,
+            "setScale", &ScrollingBackground::setScale,
+            "setSpriteRect", &ScrollingBackground::setSpriteRect,
+            "setRotation", &ScrollingBackground::setRotation,
+            "setSpeed", &ScrollingBackground::setSpeed
+        );
+
+        _luaState.new_usertype<ImageBackground>("ImageBackground",
+            sol::constructors<ImageBackground(const std::string&)>(),
+            "update", &ImageBackground::update,
+            "setPosition", &ImageBackground::setPosition,
+            "setSize", &ImageBackground::setSize,
+            "setScale", &ImageBackground::setScale,
+            "setSpriteRect", &ImageBackground::setSpriteRect,
+            "setRotation", &ImageBackground::setRotation
+        );
+
+        _luaState.new_usertype<ParallaxBackground>("ParallaxBackground",
+            sol::constructors<ParallaxBackground(const std::vector<std::string>&)>(),
+            "update", &ParallaxBackground::update,
+            "setPosition", &ParallaxBackground::setPosition,
+            "setSize", &ParallaxBackground::setSize,
+            "setScale", &ParallaxBackground::setScale,
+            "setSpeeds", &ParallaxBackground::setSpeeds,
+            "setDirection", &ParallaxBackground::setDirection
+        );
+    }
 }

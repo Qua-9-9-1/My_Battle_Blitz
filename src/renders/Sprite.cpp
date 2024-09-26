@@ -18,6 +18,7 @@ namespace ware {
     void Sprite::loadImage(sf::Image image)
     {
         _texture.loadFromImage(image);
+        _texture.setSmooth(true);
         _sprite.setTexture(_texture);
     }
 

@@ -10,15 +10,15 @@
 #include <SFML/Graphics.hpp>
 #include "IObject.hpp"
 #include "utils.hpp"
-
-#include <iostream>
+#include <cmath>
+#include "Macros.hpp"
 
 namespace ware {
     class ARenderer : public IObject {
         public:
             ARenderer() = default;
             ~ARenderer() = default;
-            void update(sf::RenderWindow& window) = 0;
+            void update(sf::RenderWindow& window) override = 0;
             virtual void disappear() = 0;
             virtual void setPosition(float x, float y) = 0;
             virtual void setScale(float x, float y) = 0;
@@ -115,5 +115,86 @@ namespace ware {
             sf::Color           _textColor;
             int                 _size;
             sf::Vector2f        _padding;
+    };
+
+    class ABackground : public IObject {
+        public:
+            ABackground() = default;
+            ~ABackground() = default;
+            void update(sf::RenderWindow& window) override = 0;
+            virtual void setPosition(float x, float y) = 0;
+            virtual void setSize(float x,float y) = 0;
+            virtual void setScale(float x, float y) = 0;
+            virtual void setRotation(float angle) = 0;
+    };
+
+    class SolidColorBackground : public ABackground {
+        public:
+            SolidColorBackground(float r, float g, float b, float a);
+            void update(sf::RenderWindow& window) override;
+            void setPosition(float x, float y) override;
+            void setSize(float x, float y) override;
+            void setScale(float x, float y) override;
+            void setRotation(float angle) override;
+            void setColor(const sf::Color& color);
+        private:
+            sf::RectangleShape _shape;
+    };
+
+    class ScrollingBackground : public ABackground {
+        public:
+            ScrollingBackground(const std::string& filePath);
+            void update(sf::RenderWindow& window) override;
+            void setPosition(float x, float y) override;
+            void setSize(float x, float y) override;
+            void setScale(float x, float y) override;
+            void setRotation(float angle) override;
+            void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
+            void setSpeed(float speed);
+            void setDirection(float angle);
+
+        private:
+            sf::Texture _texture;
+            sf::Sprite _sprite;
+            sf::IntRect _rect;
+            float _speed;
+            sf::Vector2f _position;
+            float _angle;
+    };
+
+    class ImageBackground : public ABackground {
+        public:
+            ImageBackground(const std::string& filePath);
+            void update(sf::RenderWindow& window) override;
+            void setPosition(float x, float y) override;
+            void setSize(float x, float y) override;
+            void setScale(float x, float y) override;
+            void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
+            void setRotation(float angle) override;
+
+        private:
+            sf::Texture _texture;
+            sf::Sprite _sprite;
+            sf::IntRect _rect;
+    };
+
+    class ParallaxBackground : public ABackground {
+        public:
+            ParallaxBackground(const std::vector<std::string>& filePaths);
+            void update(sf::RenderWindow& window) override;
+            void setPosition(float x, float y) override;
+            void setSize(float x, float y) override;
+            void setScale(float x, float y) override;
+            void setRotation(float angle) override;
+            void setSpeeds(float Xspeed, float Yspeed);
+            void setDirection(float angle);
+
+        private:
+            int _selected_sprite;
+            std::vector<sf::Texture> _textures;
+            std::vector<sf::Sprite> _sprites;
+            std::vector<float> _speeds;
+            sf::Vector2f _position;
+            float _angle;
     };
 }

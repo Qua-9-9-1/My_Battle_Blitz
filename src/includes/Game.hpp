@@ -10,9 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include "LuaManager.hpp"
 #include "View.hpp"
-
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#include "Macros.hpp"
 
 namespace ware {
     class Game {

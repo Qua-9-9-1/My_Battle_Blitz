@@ -9,6 +9,7 @@ local miniGame = {
     image = nil,
     sprite = nil;
     sound = nil;
+    background = nil;
     freeplay_button = nil;
     showdown_button = nil;
     settings_button = nil;
@@ -80,6 +81,7 @@ function init()
     miniGame.sprite = Sprite.new(miniGame.image:getImage());
     miniGame.sound = Sound.new("assets/sounds/random.ogg");
     miniGame.music = Music.new("assets/music/menu.ogg");
+    miniGame.background = ScrollingBackground.new("assets/sprites/game_logo.png");
     buttons_init();
     miniGame.sprite:setPosition(400, 400);
     miniGame.music:play();
@@ -95,6 +97,7 @@ function update(window, deltaTime)
     if (miniGame.p1_pause or miniGame.p2_pause) then
         return;
     end
+    miniGame.background:update(window);
     miniGame.sprite:update(window);
     miniGame.sprite:rotate(0.1);
     miniGame.music:update(window);
@@ -107,50 +110,85 @@ function update(window, deltaTime)
     return;
 end
 
+function block_action()
+    return false;
+end
+
 function on_P1_left()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     miniGame.sprite:move(-1, 0);
     return;
 end
 
 function on_P1_right()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     miniGame.sprite:move(1, 0);
     return;
 end
 
 function on_P1_up()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     print("P1 up")
     return;
 end
 
 function on_P1_down()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     print("P1 down")
     return;
 end
 
 function on_P1_1()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     miniGame.sound:play();
     return;
 end
 
 function on_P1_2()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     print("P1 action")
     return;
 end
 
 function on_P1_3()
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or not miniGame.p1_leads
+    or block_action then
+        return
+    end
     print("P1 action")
     return;
 end
 
 function on_P1_start(is_minigame_running, pause)
-    if miniGame.p2_pause then return end
+    if miniGame.p2_pause
+    or block_action then
+        return
+    end
     if (is_minigame_running) then
         if (not miniGame.p1_pause) then
             miniGame.p1_pause = true;
@@ -164,51 +202,89 @@ function on_P1_start(is_minigame_running, pause)
 end
 
 function on_P2_left()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
     print("P2 left")
     return;
 end
 
 function on_P2_right()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
     print("P2 right")
     return;
 end
 
 function on_P2_up()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
     print("P2 up")
     return;
 end
 
 function on_P2_down()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
     print("P2 down")
     return;
 end
 
 function on_P2_1()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
     print("P2 action")
     return;
 end
 
 function on_P2_2()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
 
     print("P2 action")
     return;
 end
 
 function on_P2_3()
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause
+    or miniGame.p1_leads
+    or block_action then
+        return
+    end
+
 
     print("P2 action")
     return;
 end
 
 function on_P2_start(is_minigame_running, pause)
-    if miniGame.p1_pause then return end
+    if miniGame.p1_pause 
+    or block_action then
+        return
+    end
+
     if (is_minigame_running) then
         if (not miniGame.p2_pause) then
             miniGame.p2_pause = true;

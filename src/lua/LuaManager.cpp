@@ -18,6 +18,7 @@ namespace ware {
         loadButtonClass();
         loadSoundClass();
         loadMusicClass();
+        loadBackgroundClasses();
     }
 
     LuaManager::~LuaManager()

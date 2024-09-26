@@ -14,12 +14,12 @@ namespace ware {
     class AAudio : public IObject {
         public:
             virtual ~AAudio() = default;
+            void update(sf::RenderWindow& window) override = 0;
             virtual void play() = 0;
             virtual void stop() = 0;
             virtual void loadFile(const std::string filePath) = 0;
             virtual void setVolume(float volume) = 0;
             virtual void setPitch(float pitch) = 0;
-            void update(sf::RenderWindow& window) override = 0;
 
         protected:
             bool _isPlaying;

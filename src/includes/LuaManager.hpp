@@ -23,6 +23,7 @@ namespace ware {
             void loadButtonClass();
             void loadSoundClass();
             void loadMusicClass();
+            void loadBackgroundClasses();
             bool loadScript(const std::string& scriptPath);
             void unloadScript();
             sol::table getGlobalTable();
