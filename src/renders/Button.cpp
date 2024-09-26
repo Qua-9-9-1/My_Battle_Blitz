@@ -5,11 +5,9 @@ namespace ware {
     Button::Button(const std::string text, const std::string fontPath, float x, float y)
     {
         _padding = {0, 0};
-        _size = 30;
         _font.loadFromFile(fontPath);
         _text.setFont(_font);
         setString(text);
-        setSize(_size);
         _text.setFillColor(sf::Color::Black);
         _button.setFillColor(sf::Color::White);
         _button.setOutlineColor(sf::Color::Black);
@@ -98,20 +96,16 @@ namespace ware {
         centerText();
     }
 
-    void Button::setSize(int size)
+    void Button::setSize(float x, float y)
     {
-        _size = size;
-        _text.setCharacterSize(_size);
-        _button.setSize(sf::Vector2f(_text.getLocalBounds().width, _text.getLocalBounds().height));
-        setPadding(_padding.x, _padding.y);
+        _button.setSize(sf::Vector2f(x, y));
         setCentered();
         centerText();
     }
 
-    void Button::setPadding(float x, float y)
+    void Button::setTextSize(int size)
     {
-        _padding = {x, y};
-        _button.setSize(sf::Vector2f(_text.getLocalBounds().width + x, _text.getLocalBounds().height + y));
+        _text.setCharacterSize(size);
         setCentered();
         centerText();
     }

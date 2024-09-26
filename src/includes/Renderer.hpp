@@ -99,8 +99,8 @@ namespace ware {
             void setBorderColor(float r, float g, float b, float a);
             void setTextColor(float r, float g, float b, float a);
             void setString(const std::string text);
-            void setSize(int size);
-            void setPadding(float x, float y);
+            void setSize(float x, float y);
+            void setTextSize(int size);
             void setBorder(float thickness);            
             void setTexture(const std::string filePath);
             void setTextureRect(int start_x, int start_y, int width, int height);

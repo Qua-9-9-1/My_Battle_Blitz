@@ -5,6 +5,9 @@
 -- Email:  quentduva@gmail.com
 --\
 
+local WINDOW_WIDTH = 800
+local WINDOW_HEIGHT = 600
+
 local miniGame = {
     image = nil,
     sprite = nil;
@@ -27,56 +30,56 @@ local miniGame = {
 
 function buttons_init()
     miniGame.showdown_button = Button.new("SHOWDOWN", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.showdown_button:setSize(70);
-    miniGame.showdown_button:setPadding(30, 30);
+    miniGame.showdown_button:setTextSize(70);
+    miniGame.showdown_button:setSize(480, 100);
     miniGame.showdown_button:setColor(0, 0, 0, 255);
     miniGame.showdown_button:setBorderColor(255, 255, 255, 255);
     miniGame.showdown_button:setTextColor(255, 255, 255, 255);
     miniGame.showdown_button:setPosition(400, 100);
     
     miniGame.freeplay_button = Button.new("FREEPLAY", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.freeplay_button:setSize(70);
-    miniGame.freeplay_button:setPadding(30, 30);
+    miniGame.freeplay_button:setTextSize(70);
+    miniGame.freeplay_button:setSize(480, 100);
     miniGame.freeplay_button:setColor(0, 0, 0, 255);
     miniGame.freeplay_button:setBorderColor(255, 255, 255, 255);
     miniGame.freeplay_button:setTextColor(255, 255, 255, 255);
-    miniGame.freeplay_button:setPosition(400, 300);
+    miniGame.freeplay_button:setPosition(400, 250);
     
     miniGame.controls_button = Button.new("CONTROLS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.controls_button:setSize(70);
-    miniGame.controls_button:setPadding(30, 30);
+    miniGame.controls_button:setTextSize(70);
+    miniGame.controls_button:setSize(480, 100);
     miniGame.controls_button:setColor(0, 0, 0, 255);
     miniGame.controls_button:setBorderColor(255, 255, 255, 255);
     miniGame.controls_button:setTextColor(255, 255, 255, 255);
-    miniGame.controls_button:setPosition(400, 500);
+    miniGame.controls_button:setPosition(400, 400);
     
     miniGame.settings_button = Button.new("SETTINGS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.settings_button:setSize(50);
-    miniGame.settings_button:setPadding(30, 30);
+    miniGame.settings_button:setTextSize(50);
+    miniGame.settings_button:setSize(250, 100);
     miniGame.settings_button:setColor(0, 0, 0, 255);
     miniGame.settings_button:setBorderColor(255, 255, 255, 255);
     miniGame.settings_button:setTextColor(255, 255, 255, 255);
-    miniGame.settings_button:setPosition(50, 700);
+    miniGame.settings_button:setPosition(175, 580);
     
     miniGame.credits_button = Button.new("CREDITS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.credits_button:setSize(50);
-    miniGame.credits_button:setPadding(30, 30);
+    miniGame.credits_button:setTextSize(50);
+    miniGame.credits_button:setSize(250, 100);
     miniGame.credits_button:setColor(0, 0, 0, 255);
     miniGame.credits_button:setBorderColor(245, 245, 255, 255);
     miniGame.credits_button:setTextColor(245, 245, 255, 255);
-    miniGame.credits_button:setPosition(400, 700);
+    miniGame.credits_button:setPosition(400, 580);
     
     miniGame.exit_button = Button.new("QUIT", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.exit_button:setSize(50);
-    miniGame.exit_button:setPadding(30, 30);
+    miniGame.exit_button:setTextSize(50);
+    miniGame.exit_button:setSize(250, 100);
     miniGame.exit_button:setColor(0, 0, 0, 255);
     miniGame.exit_button:setBorderColor(220, 0, 0, 255);
     miniGame.exit_button:setTextColor(220, 0, 0, 255);
-    miniGame.exit_button:setPosition(750, 700);
+    miniGame.exit_button:setPosition(625, 580);
     return;
 end
 
-function init()
+function init(version)
     miniGame.image = Image.new("assets/sprites/game_logo.png");
     miniGame.sprite = Sprite.new(miniGame.image:getImage());
     miniGame.sound = Sound.new("assets/sounds/random.ogg");

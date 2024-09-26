@@ -63,7 +63,7 @@ namespace ware {
             "setTextColor", &Button::setTextColor,
             "setString", &Button::setString,
             "setSize", &Button::setSize,
-            "setPadding", &Button::setPadding,
+            "setTextSize", &Button::setTextSize,
             "setBorder", &Button::setBorder,
             "setTexture", &Button::setTexture,
             "setTextureRect", &Button::setTextureRect
