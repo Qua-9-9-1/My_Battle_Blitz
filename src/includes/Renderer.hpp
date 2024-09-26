@@ -9,9 +9,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "IObject.hpp"
-#include "utils.hpp"
+#include "Utils.hpp"
 #include <cmath>
-#include "Macros.hpp"
 
 namespace ware {
     class ARenderer : public IObject {
@@ -74,8 +73,9 @@ namespace ware {
             void setScale(float x, float y) override;
             void setRotation(float angle) override;
             void rotate(float angle);
-            void setColor(sf::Color color);
-            void setBorderColor(sf::Color color);
+            void setColor(float r, float g, float b, float a);
+            void setBorderColor(float r, float g, float b, float a);
+            void setBorderThickness(float thickness);
             void setString(const std::string text);
             void setCharacterSize(int size);
         private:

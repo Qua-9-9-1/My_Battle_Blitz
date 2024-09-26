@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include "LuaManager.hpp"
 #include "View.hpp"
-#include "Macros.hpp"
+#include "Utils.hpp"
 
 namespace ware {
     class Game {

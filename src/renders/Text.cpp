@@ -6,6 +6,7 @@ namespace ware {
     {
         loadFile(fontPath);
         setString(text);
+        _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
     }
 
     Text::~Text()
@@ -53,19 +54,25 @@ namespace ware {
         _text.rotate(angle);
     }
 
-    void Text::setColor(sf::Color color)
+    void Text::setColor(float r, float g, float b, float a)
     {
-        _text.setFillColor(color);
+        _text.setFillColor(sf::Color(r, g, b, a));
     }
 
-    void Text::setBorderColor(sf::Color color)
+    void Text::setBorderColor(float r, float g, float b, float a)
     {
-        _text.setOutlineColor(color);
+        _text.setOutlineColor(sf::Color(r, g, b, a));
+    }
+
+    void Text::setBorderThickness(float thickness)
+    {
+        _text.setOutlineThickness(thickness);
     }
 
     void Text::setString(const std::string text)
     {
         _text.setString(text);
+        _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
     }
 
     void Text::setCharacterSize(int size)

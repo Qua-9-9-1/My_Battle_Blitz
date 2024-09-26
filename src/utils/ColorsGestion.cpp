@@ -5,7 +5,7 @@
 ** Email:  quentduva@gmail.com
 */
 
-#include "utils.hpp"
+#include "Utils.hpp"
 
 sf::Color darkenColor(sf::Color color, float factor)
 {

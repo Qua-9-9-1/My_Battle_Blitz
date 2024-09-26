@@ -12,13 +12,13 @@ namespace ware {
 
         _luaMenuFunctions.clear();
         _luaMenuManager->loadScript("scripts/game_menu/menu.lua");
-        _luaMenuFunctions["init"] = _luaMenuManager->getFunction("init");
-        if (!_luaMenuFunctions["init"].valid()) {
+        auto InitFunction = _luaMenuManager->getFunction("init");
+        if (!InitFunction.valid()) {
             std::cerr << "Failed to get Lua function init" << std::endl;
             exit(1);
         }
         try {
-            sol::protected_function_result result = _luaMenuFunctions["init"]();
+            sol::protected_function_result result = InitFunction(GAME_VERSION);
             if (!result.valid() || result.get<bool>() == false) {
                 sol::error err = result;
                 std::cerr << "Error initializing game: " << err.what() << std::endl;
@@ -63,21 +63,20 @@ namespace ware {
     int Game::loadMinigame(const std::string minigameName)
     {
         std::vector<std::string> requiredFunctions = {
-            "update", "draw", "onP1Left", "onP1Right", "onP1Up", "onP1Down",
+            "update", "onP1Left", "onP1Right", "onP1Up", "onP1Down",
             "onP2Left", "onP2Right", "onP2Up", "onP2Down", "onP1_1", "onP1_2",
             "onP1_3", "onP2_1", "onP2_2", "onP2_3"
         };
 
         _luaFunctions.clear();
         _luaManager->loadScript("scripts/" + minigameName + ".lua");
-        _luaFunctions["init"] = _luaManager->getFunction("init");
-        //pas besoin de l'enregistrer, donner en paramètres afficher règles
-        if (!_luaFunctions["init"].valid()) {
+        auto InitFunction = _luaManager->getFunction("init");
+        if (!InitFunction.valid()) {
             std::cerr << "Failed to get Lua function init" << std::endl;
             return 1;
         }
         try {
-            sol::protected_function_result result = _luaFunctions["init"]();
+            sol::protected_function_result result = InitFunction(true);
             if (!result.valid() || result.get<bool>() == false) {
                 sol::error err = result;
                 std::cerr << "Error initializing game: " << err.what() << std::endl;
@@ -88,7 +87,6 @@ namespace ware {
             return 1;
         }
         _luaFunctions["update"] = _luaManager->getFunction("update");
-        _luaFunctions["draw"] = _luaManager->getFunction("draw");
         _luaFunctions["onP1Left"] = _luaManager->getFunction("on_P1_left");
         _luaFunctions["onP1Right"] = _luaManager->getFunction("on_P1_right");
         _luaFunctions["onP1Up"] = _luaManager->getFunction("on_P1_up");

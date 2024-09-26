@@ -8,10 +8,14 @@
 local WINDOW_WIDTH = 800
 local WINDOW_HEIGHT = 600
 
+-- local random_int = require("utils.random").randomInt
+-- local random_float = require("utils.random").randomFloat
+
 local miniGame = {
     image = nil,
-    sprite = nil;
+    menu_sprite = nil;
     sound = nil;
+    text = nil;
     background = nil;
     freeplay_button = nil;
     showdown_button = nil;
@@ -26,6 +30,11 @@ local miniGame = {
     p1_pause = false;
     p2_pause = false;
     p1_leads = true;
+    main_menu = true;
+    credits_menu = false;
+    freeplay_menu = false;
+    showdown_menu = false;
+    settings_menu = false;
 };
 
 function buttons_init()
@@ -35,7 +44,7 @@ function buttons_init()
     miniGame.showdown_button:setColor(0, 0, 0, 255);
     miniGame.showdown_button:setBorderColor(255, 255, 255, 255);
     miniGame.showdown_button:setTextColor(255, 255, 255, 255);
-    miniGame.showdown_button:setPosition(400, 100);
+    miniGame.showdown_button:setPosition(400, 130);
     
     miniGame.freeplay_button = Button.new("FREEPLAY", "assets/font/Mario-Kart-DS.ttf", 200, 200);
     miniGame.freeplay_button:setTextSize(70);
@@ -43,7 +52,7 @@ function buttons_init()
     miniGame.freeplay_button:setColor(0, 0, 0, 255);
     miniGame.freeplay_button:setBorderColor(255, 255, 255, 255);
     miniGame.freeplay_button:setTextColor(255, 255, 255, 255);
-    miniGame.freeplay_button:setPosition(400, 250);
+    miniGame.freeplay_button:setPosition(400, 280);
     
     miniGame.controls_button = Button.new("CONTROLS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
     miniGame.controls_button:setTextSize(70);
@@ -51,42 +60,45 @@ function buttons_init()
     miniGame.controls_button:setColor(0, 0, 0, 255);
     miniGame.controls_button:setBorderColor(255, 255, 255, 255);
     miniGame.controls_button:setTextColor(255, 255, 255, 255);
-    miniGame.controls_button:setPosition(400, 400);
+    miniGame.controls_button:setPosition(400, 430);
     
     miniGame.settings_button = Button.new("SETTINGS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.settings_button:setTextSize(50);
-    miniGame.settings_button:setSize(250, 100);
+    miniGame.settings_button:setTextSize(40);
+    miniGame.settings_button:setSize(220, 75);
     miniGame.settings_button:setColor(0, 0, 0, 255);
     miniGame.settings_button:setBorderColor(255, 255, 255, 255);
     miniGame.settings_button:setTextColor(255, 255, 255, 255);
-    miniGame.settings_button:setPosition(175, 580);
+    miniGame.settings_button:setPosition(150, 570);
     
     miniGame.credits_button = Button.new("CREDITS", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.credits_button:setTextSize(50);
-    miniGame.credits_button:setSize(250, 100);
+    miniGame.credits_button:setTextSize(40);
+    miniGame.credits_button:setSize(220, 75);
     miniGame.credits_button:setColor(0, 0, 0, 255);
     miniGame.credits_button:setBorderColor(245, 245, 255, 255);
     miniGame.credits_button:setTextColor(245, 245, 255, 255);
-    miniGame.credits_button:setPosition(400, 580);
+    miniGame.credits_button:setPosition(400, 570);
     
     miniGame.exit_button = Button.new("QUIT", "assets/font/Mario-Kart-DS.ttf", 200, 200);
-    miniGame.exit_button:setTextSize(50);
-    miniGame.exit_button:setSize(250, 100);
+    miniGame.exit_button:setTextSize(40);
+    miniGame.exit_button:setSize(220, 75);
     miniGame.exit_button:setColor(0, 0, 0, 255);
     miniGame.exit_button:setBorderColor(220, 0, 0, 255);
     miniGame.exit_button:setTextColor(220, 0, 0, 255);
-    miniGame.exit_button:setPosition(625, 580);
+    miniGame.exit_button:setPosition(650, 570);
     return;
 end
 
 function init(version)
     miniGame.image = Image.new("assets/sprites/game_logo.png");
     miniGame.sprite = Sprite.new(miniGame.image:getImage());
+    miniGame.text = Text.new("ver: " .. version, "assets/font/Early_GameBoy.ttf");
     miniGame.sound = Sound.new("assets/sounds/random.ogg");
     miniGame.music = Music.new("assets/music/menu.ogg");
     miniGame.background = ScrollingBackground.new("assets/sprites/game_logo.png");
+    --miniGame.background:setDirection(random_int(0, 359));
     buttons_init();
     miniGame.sprite:setPosition(400, 400);
+    miniGame.text:setPosition(400, 10);
     --miniGame.music:play();
     miniGame.music:setReplayPoint(6);
     return true;
@@ -103,6 +115,7 @@ function update(window, deltaTime)
     miniGame.background:update(window);
     miniGame.sprite:update(window);
     miniGame.sprite:rotate(0.1);
+    miniGame.text:update(window);
     --miniGame.music:update(window);
     miniGame.showdown_button:update(window);
     miniGame.freeplay_button:update(window);

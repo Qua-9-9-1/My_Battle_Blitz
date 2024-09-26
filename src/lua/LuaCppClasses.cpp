@@ -43,7 +43,11 @@ namespace ware {
             "setScale", &Text::setScale,
             "setRotation", &Text::setRotation,
             "rotate", &Text::rotate,
-            "setColor", &Text::setColor
+            "setColor", &Text::setColor,
+            "setBorderColor", &Text::setBorderColor,
+            "setBorderThickness", &Text::setBorderThickness,
+            "setString", &Text::setString,
+            "setCharacterSize", &Text::setCharacterSize
         );
     }
 
