@@ -153,6 +153,7 @@ namespace ware {
             void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
             void setSpeed(float speed);
             void setDirection(float angle);
+            void setColor(float r, float g, float b, float a);
         private:
             sf::Texture _texture;
             sf::Sprite _sprite;
@@ -171,6 +172,7 @@ namespace ware {
             void setScale(float x, float y) override;
             void setSpriteRect(int posX, int posY, int sizeX, int sizeY);
             void setRotation(float angle) override;
+            void setColor(float r, float g, float b, float a);
         private:
             sf::Texture _texture;
             sf::Sprite _sprite;

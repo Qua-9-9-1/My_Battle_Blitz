@@ -33,9 +33,9 @@ namespace ware {
         _shape.setRotation(angle);
     }
 
-    void SolidColorBackground::setColor(const sf::Color& color)
+    void SolidColorBackground::setColor(float r, float g, float b, float a)
     {
-        _shape.setFillColor(color);
+        _shape.setFillColor(sf::Color(r, g, b, a));
     }
 
     ScrollingBackground::ScrollingBackground(const std::string& filePath)
@@ -116,6 +116,11 @@ namespace ware {
         reinitPosition(true, true);
     }
 
+    void ScrollingBackground::setColor(float r, float g, float b, float a)
+    {
+        _sprite.setColor(sf::Color(r, g, b, a));
+    }
+
     ImageBackground::ImageBackground(const std::string& filePath)
     {
         _texture.loadFromFile(filePath);
@@ -154,10 +159,14 @@ namespace ware {
         _sprite.setTextureRect(_rect);
     }
 
-
     void ImageBackground::setRotation(float angle)
     {
         _sprite.setRotation(angle);
+    }
+
+    void ImageBackground::setColor(float r, float g, float b, float a)
+    {
+        _sprite.setColor(sf::Color(r, g, b, a));
     }
 
     ParallaxBackground::ParallaxBackground(const std::vector<std::string>& filePaths)
