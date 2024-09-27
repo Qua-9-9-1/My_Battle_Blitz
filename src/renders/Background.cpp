@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include <iostream>
 
 namespace ware {
     SolidColorBackground::SolidColorBackground(float r, float g, float b, float a)
@@ -38,14 +39,15 @@ namespace ware {
         _shape.setFillColor(sf::Color(r, g, b, a));
     }
 
-    ScrollingBackground::ScrollingBackground(const std::string& filePath)
+    ScrollingBackground::ScrollingBackground(sf::Image image)
     {
-        _texture.loadFromFile(filePath);
+        _defaultPos = {-WINDOW_WIDTH, -WINDOW_HEIGHT};
+        _texture.loadFromImage(image);
         _texture.setSmooth(true);
         _texture.setRepeated(true);
-        _sprite.setTextureRect(sf::IntRect(0, 0, WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2));
+        setSpriteRect(0, 0, WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2);
         _sprite.setTexture(_texture);
-        _rect = _sprite.getTextureRect();
+        _textureSize = {static_cast<float>(_texture.getSize().x), static_cast<float>(_texture.getSize().y)};
         setSpeed(1);
         setDirection(45);
     }
@@ -56,12 +58,10 @@ namespace ware {
         sf::Vector2f position = _sprite.getPosition();
         position.x += WINDOW_WIDTH;
         position.y += WINDOW_HEIGHT;
-        float textureWidth = _texture.getSize().x;
-        float textureHeight = _texture.getSize().y;
 
-        if (position.x <= -textureWidth || position.x >= textureWidth)
+        if (position.x <= -_textureSize.x || position.x >= _textureSize.x)
             reinitPosition(true, false);
-        if (position.y <= -textureHeight || position.y >= textureHeight)
+        if (position.y <= -_textureSize.y || position.y >= _textureSize.y)
             reinitPosition(false, true);
         window.draw(_sprite);
     }
@@ -73,12 +73,18 @@ namespace ware {
 
     void ScrollingBackground::setSize(float x, float y)
     {
-        _sprite.setScale(x, y);
-        reinitPosition(true, true);
+        float scaleFactorX = x / _sprite.getGlobalBounds().width;
+        float scaleFactorY = y / _sprite.getGlobalBounds().height;
+        setScale(scaleFactorX, scaleFactorY);
     }
 
     void ScrollingBackground::setScale(float x, float y)
     {
+        if (x == 0 || y == 0) return;
+        setSpriteRect(0, 0, WINDOW_WIDTH * 2 * 1 / x, WINDOW_HEIGHT * 2 * 1 / y);
+        _sprite.setTexture(_texture);
+        _textureSize.x = _texture.getSize().x * x;
+        _textureSize.y = _texture.getSize().y * y;
         _sprite.setScale(x, y);
         reinitPosition(true, true);
     }
@@ -91,8 +97,8 @@ namespace ware {
     void ScrollingBackground::reinitPosition(bool horizontal, bool vertical)
     {
         setPosition(
-            horizontal ? -WINDOW_WIDTH : _sprite.getPosition().x,
-            vertical ? -WINDOW_HEIGHT : _sprite.getPosition().y);
+            horizontal ? _defaultPos.x : _sprite.getPosition().x,
+            vertical ? _defaultPos.y : _sprite.getPosition().y);
     }
 
     void ScrollingBackground::setSpriteRect(int posX, int posY, int sizeX, int sizeY)
@@ -121,9 +127,9 @@ namespace ware {
         _sprite.setColor(sf::Color(r, g, b, a));
     }
 
-    ImageBackground::ImageBackground(const std::string& filePath)
+    ImageBackground::ImageBackground(sf::Image image)
     {
-        _texture.loadFromFile(filePath);
+        _texture.loadFromImage(image);
         _sprite.setTexture(_texture);
         _rect = _sprite.getTextureRect();
     }
@@ -169,63 +175,54 @@ namespace ware {
         _sprite.setColor(sf::Color(r, g, b, a));
     }
 
-    ParallaxBackground::ParallaxBackground(const std::vector<std::string>& filePaths)
+    ParallaxBackground::ParallaxBackground(sf::Image image, int layers)
     {
-        for (const auto& filePath : filePaths) {
-            sf::Texture texture;
-            texture.loadFromFile(filePath);
-            _textures.push_back(texture);
-        }
-        _selected_sprite = 0;
+        if (layers = 0) return;
+        _texture.loadFromImage(image);
+        _texture.setSmooth(true);
     }
 
     void ParallaxBackground::update(sf::RenderWindow& window)
     {
-        for (const auto& texture : _textures) {
-            sf::Sprite sprite(texture);
-            sprite.setPosition(_position);
+        for (const auto& sprite : _sprites) {
             window.draw(sprite);
         }
     }
 
     void ParallaxBackground::setPosition(float x, float y)
     {
-        _position = sf::Vector2f(x, y);
+        for (auto& sprite : _sprites) {
+            sprite.setPosition(x, y);
+        }
     }
 
     void ParallaxBackground::setSize(float x, float y)
     {
-        for (auto& texture : _textures) {
-            texture.setSmooth(true);
-        }
     }
 
     void ParallaxBackground::setScale(float x, float y)
     {
-        for (auto& texture : _textures) {
-            texture.setSmooth(true);
+        for (auto& sprite : _sprites) {
+            sprite.setPosition(x, y);
         }
     }
 
     void ParallaxBackground::setRotation(float angle)
     {
-        for (auto& texture : _textures) {
-            texture.setSmooth(true);
+        for (auto& sprite : _sprites) {
+            sprite.setRotation(angle);
         }
     }
 
-    void ParallaxBackground::setSpeeds(float Xspeed, float Yspeed)
+    void ParallaxBackground::setSpeed(int layer, float speed)
     {
-        for (auto& texture : _textures) {
-            texture.setSmooth(true);
-        }
+        if (layer < 0 || layer > _sprites.size()) return;
+        _speeds[layer] = speed;
     }
 
     void ParallaxBackground::setDirection(float angle)
     {
-        for (auto& texture : _textures) {
-            texture.setSmooth(true);
-        }
+        _angle = angle;
     }
 
 }

@@ -113,7 +113,7 @@ namespace ware {
         );
 
         _luaState.new_usertype<ScrollingBackground>("ScrollingBackground",
-            sol::constructors<ScrollingBackground(const std::string&)>(),
+            sol::constructors<ScrollingBackground(sf::Image)>(),
             "update", &ScrollingBackground::update,
             "setPosition", &ScrollingBackground::setPosition,
             "setSize", &ScrollingBackground::setSize,
@@ -126,7 +126,7 @@ namespace ware {
         );
 
         _luaState.new_usertype<ImageBackground>("ImageBackground",
-            sol::constructors<ImageBackground(const std::string&)>(),
+            sol::constructors<ImageBackground(sf::Image)>(),
             "update", &ImageBackground::update,
             "setPosition", &ImageBackground::setPosition,
             "setSize", &ImageBackground::setSize,
@@ -136,12 +136,12 @@ namespace ware {
         );
 
         _luaState.new_usertype<ParallaxBackground>("ParallaxBackground",
-            sol::constructors<ParallaxBackground(const std::vector<std::string>&)>(),
+            sol::constructors<ParallaxBackground(sf::Image, int)>(),
             "update", &ParallaxBackground::update,
             "setPosition", &ParallaxBackground::setPosition,
             "setSize", &ParallaxBackground::setSize,
             "setScale", &ParallaxBackground::setScale,
-            "setSpeeds", &ParallaxBackground::setSpeeds,
+            "setSpeeds", &ParallaxBackground::setSpeed,
             "setDirection", &ParallaxBackground::setDirection
         );
     }

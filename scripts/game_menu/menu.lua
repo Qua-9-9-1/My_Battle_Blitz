@@ -8,8 +8,7 @@
 local WINDOW_WIDTH = 800
 local WINDOW_HEIGHT = 600
 
--- local random_int = require("utils.random").randomInt
--- local random_float = require("utils.random").randomFloat
+-- local random = require("random");
 
 local miniGame = {
     image = nil,
@@ -89,16 +88,18 @@ function buttons_init()
 end
 
 function init(version)
-    miniGame.image = Image.new("assets/sprites/game_logo.png");
+    miniGame.image = Image.new("assets/sprites/game_menu.png");
     miniGame.sprite = Sprite.new(miniGame.image:getImage());
     miniGame.text = Text.new("ver: " .. version, "assets/font/Early_GameBoy.ttf");
     miniGame.sound = Sound.new("assets/sounds/random.ogg");
     miniGame.music = Music.new("assets/music/menu.ogg");
-    miniGame.background = ScrollingBackground.new("assets/sprites/game_logo.png");
-    --miniGame.background:setDirection(random_int(0, 359));
+    miniGame.background = ScrollingBackground.new(miniGame.image:getImage());
+    miniGame.background:setScale(0.5, 0.5);
+    --miniGame.background:setDirection(random.int(0, 359));
     buttons_init();
     miniGame.sprite:setPosition(400, 400);
-    miniGame.text:setPosition(400, 10);
+    miniGame.text:setPosition(620, 25);
+    miniGame.text:setBorderThickness(2);
     --miniGame.music:play();
     miniGame.music:setReplayPoint(6);
     return true;
@@ -186,7 +187,7 @@ function on_P1_2()
     or block_action then
         return
     end
-    print("P1 action")
+    miniGame.background:setScale(0.9, 0.9);
     return;
 end
 

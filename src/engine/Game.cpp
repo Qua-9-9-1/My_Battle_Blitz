@@ -13,8 +13,8 @@ namespace ware {
     _view1(),
     _view2()
     {
-        _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames");
-        _window.setFramerateLimit(60);
+        _fullScreen = false;
+        createWindow();
         _view1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         _view1.setCenter(0, 0);
         //_view1.setCenter(_window.getSize().x / 2.f, _window.getSize().y / 2.f);
@@ -57,5 +57,16 @@ namespace ware {
             }
             _window.display();
         }
+    }
+
+    void Game::createWindow()
+    {
+        if (_fullScreen) {
+            _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames", sf::Style::Fullscreen);
+        } else {
+            _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames");
+        }
+        _window.setFramerateLimit(60);
+        _window.setMouseCursorVisible(false);
     }
 }

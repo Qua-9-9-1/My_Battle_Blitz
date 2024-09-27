@@ -67,4 +67,11 @@ namespace ware {
             _view1.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
         }
     }
+
+    void Game::setFullScreen()
+    {
+        _window.close();
+        createWindow();
+        _fullScreen = !_fullScreen;
+    }
 }

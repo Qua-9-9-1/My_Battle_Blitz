@@ -21,11 +21,13 @@ namespace ware {
             void handleEvents();
             void handleOneTimeKeys();
             void handleMutipleTimeKeys();
+            void createWindow();
             void setOneTimeArrows(bool oneTimeArrows) { _oneTimeArrows = oneTimeArrows; }
             void setOneTimeButtons(bool oneTimeButtons) { _oneTimeButtons = oneTimeButtons; }
             void launchMenu();
             void startMinigame(const std::string minigameName);
             int loadMinigame(const std::string minigameName);
+            void setFullScreen();
             void stopMinigame();
             void separateViews();
             void unifyViews();
@@ -43,6 +45,7 @@ namespace ware {
             bool                                            _oneTimeButtons;
             bool                                            _pause;
             bool                                            _separatedViews;
+            bool                                            _fullScreen;
             std::shared_ptr<LuaManager>                     _luaManager;
             std::unordered_map<std::string, sol::function> _luaFunctions;
             std::shared_ptr<LuaManager>                    _luaMenuManager;

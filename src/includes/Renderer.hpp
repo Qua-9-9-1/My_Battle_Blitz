@@ -143,7 +143,7 @@ namespace ware {
 
     class ScrollingBackground : public ABackground {
         public:
-            ScrollingBackground(const std::string& filePath);
+            ScrollingBackground(sf::Image image);
             void update(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
@@ -155,17 +155,19 @@ namespace ware {
             void setDirection(float angle);
             void setColor(float r, float g, float b, float a);
         private:
-            sf::Texture _texture;
-            sf::Sprite _sprite;
-            sf::IntRect _rect;
-            float _speed;
-            sf::Vector2f _position;
-            float _angle;
+            sf::Texture     _texture;
+            sf::Sprite      _sprite;
+            sf::IntRect     _rect;
+            float           _speed;
+            sf::Vector2f    _position;
+            sf::Vector2f    _defaultPos;
+            float           _angle;
+            sf::Vector2f    _textureSize;
     };
 
     class ImageBackground : public ABackground {
         public:
-            ImageBackground(const std::string& filePath);
+            ImageBackground(sf::Image image);
             void update(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
@@ -174,27 +176,26 @@ namespace ware {
             void setRotation(float angle) override;
             void setColor(float r, float g, float b, float a);
         private:
-            sf::Texture _texture;
-            sf::Sprite _sprite;
-            sf::IntRect _rect;
+            sf::Texture     _texture;
+            sf::Sprite      _sprite;
+            sf::IntRect     _rect;
     };
 
     class ParallaxBackground : public ABackground {
         public:
-            ParallaxBackground(const std::vector<std::string>& filePaths);
+            ParallaxBackground(sf::Image image, int layers);
             void update(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
             void setRotation(float angle) override;
-            void setSpeeds(float Xspeed, float Yspeed);
+            void setSpeed(int layer, float speed);
             void setDirection(float angle);
         private:
-            int _selected_sprite;
-            std::vector<sf::Texture> _textures;
+            sf::Texture             _texture;
             std::vector<sf::Sprite> _sprites;
-            std::vector<float> _speeds;
-            sf::Vector2f _position;
-            float _angle;
+            std::vector<float>      _speeds;
+            sf::Vector2f            _position;
+            float                   _angle;
     };
 }
