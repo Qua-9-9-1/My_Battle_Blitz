@@ -45,7 +45,7 @@ namespace ware {
 
     ScrollingBackground::ScrollingBackground(sf::Image image)
     {
-        _defaultPos = {-WINDOW_WIDTH, -WINDOW_HEIGHT};
+        _defaultPos = {-WINDOW_WIDTH / 2, -WINDOW_HEIGHT / 2};
         _texture.loadFromImage(image);
         _texture.setSmooth(true);
         _texture.setRepeated(true);
@@ -60,8 +60,8 @@ namespace ware {
     {
         _sprite.move(_speed * cos(_angle), _speed * sin(_angle));
         sf::Vector2f position = _sprite.getPosition();
-        position.x += WINDOW_WIDTH;
-        position.y += WINDOW_HEIGHT;
+        position.x += WINDOW_WIDTH / 2;
+        position.y += WINDOW_HEIGHT / 2;
 
         if (position.x <= -_textureSize.x || position.x >= _textureSize.x)
             reinitPosition(true, false);
