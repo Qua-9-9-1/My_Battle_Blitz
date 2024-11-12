@@ -11,7 +11,7 @@ namespace ware {
     LuaManager::LuaManager()
     {
         _luaState = sol::state();
-        _luaState.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string);
+        _luaState.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string, sol::lib::package);
         loadImageClass();
         loadSpriteClass();
         loadTextClass();
