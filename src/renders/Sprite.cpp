@@ -24,6 +24,10 @@ namespace ware {
 
     void Sprite::update(sf::RenderWindow& window)
     {
+    }
+
+    void Sprite::draw(sf::RenderWindow& window)
+    {
         window.draw(_sprite);
     }
 

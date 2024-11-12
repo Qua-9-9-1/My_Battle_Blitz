@@ -43,6 +43,7 @@ namespace ware {
             Sprite(sf::Image image);
             ~Sprite();
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window);
             void loadImage(sf::Image image);
             void reloadSprite();
             void disappear() override;
@@ -66,6 +67,7 @@ namespace ware {
             Text(const std::string text, const std::string fontPath);
             ~Text();
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window);
             void loadFile(const std::string filePath);
             void disappear() override;
             void setPosition(float x, float y) override;
@@ -88,6 +90,7 @@ namespace ware {
             Button(const std::string text, const std::string fontPath, float x, float y);
             ~Button();
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window);
             void disappear() override;
             void setCentered();
             void setPosition(float x, float y) override;
@@ -122,6 +125,7 @@ namespace ware {
             ABackground() = default;
             ~ABackground() = default;
             void update(sf::RenderWindow& window) override = 0;
+            virtual void draw(sf::RenderWindow& window) = 0;
             virtual void setPosition(float x, float y) = 0;
             virtual void setSize(float x,float y) = 0;
             virtual void setScale(float x, float y) = 0;
@@ -132,6 +136,7 @@ namespace ware {
         public:
             SolidColorBackground(float r, float g, float b, float a);
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
@@ -145,6 +150,7 @@ namespace ware {
         public:
             ScrollingBackground(sf::Image image);
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
@@ -169,6 +175,7 @@ namespace ware {
         public:
             ImageBackground(sf::Image image);
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;
@@ -185,6 +192,7 @@ namespace ware {
         public:
             ParallaxBackground(sf::Image image, int layers);
             void update(sf::RenderWindow& window) override;
+            void draw(sf::RenderWindow& window) override;
             void setPosition(float x, float y) override;
             void setSize(float x, float y) override;
             void setScale(float x, float y) override;

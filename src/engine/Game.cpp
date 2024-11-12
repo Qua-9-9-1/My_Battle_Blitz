@@ -17,7 +17,6 @@ namespace ware {
         createWindow();
         _view1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         _view1.setCenter(0, 0);
-        //_view1.setCenter(_window.getSize().x / 2.f, _window.getSize().y / 2.f);
         _deltaTime = 0;
         _isMinigameRunning = false;
         _oneTimeArrows = true;
@@ -61,12 +60,15 @@ namespace ware {
 
     void Game::createWindow()
     {
+        sf::Image icon;
+        icon.loadFromFile("assets/sprites/game_logo.png");
         if (_fullScreen) {
             _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames", sf::Style::Fullscreen);
         } else {
             _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames");
         }
         _window.setFramerateLimit(60);
+        _window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
         _window.setMouseCursorVisible(false);
     }
 }

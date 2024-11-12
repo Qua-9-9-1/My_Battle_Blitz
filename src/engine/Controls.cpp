@@ -54,7 +54,8 @@ namespace ware {
                 doInput("onP2_2");
             if (_event.key.code == sf::Keyboard::Numpad3)
                 doInput("onP2_3");
-        } if (_oneTimeArrows) {
+        }
+        if (_oneTimeArrows) {
             if (_event.key.code == sf::Keyboard::Z)
                 doInput("onP1Up");
             if (_event.key.code == sf::Keyboard::S)
@@ -89,7 +90,8 @@ namespace ware {
                 doInput("onP2_2");
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
                 doInput("onP2_3");
-        } if (!_oneTimeArrows) {
+        }
+        if (!_oneTimeArrows) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
                 doInput("onP1Up");
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))

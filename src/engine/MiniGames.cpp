@@ -63,7 +63,7 @@ namespace ware {
     int Game::loadMinigame(const std::string minigameName)
     {
         std::vector<std::string> requiredFunctions = {
-            "update", "onP1Left", "onP1Right", "onP1Up", "onP1Down",
+            "update", "draw", "onP1Left", "onP1Right", "onP1Up", "onP1Down",
             "onP2Left", "onP2Right", "onP2Up", "onP2Down", "onP1_1", "onP1_2",
             "onP1_3", "onP2_1", "onP2_2", "onP2_3"
         };
@@ -86,7 +86,18 @@ namespace ware {
             std::cerr << "Error initializing game: " << e.what() << std::endl;
             return 1;
         }
+        auto SeparateViews = _luaManager->getFunction("separateViews");
+        if (!SeparateViews.valid()) {
+            std::cerr << "Failed to get Lua function separateViews" << std::endl;
+            return 1;
+        }
+        if (SeparateViews()) {
+            separateViews();
+        } else {
+            unifyViews();
+        }
         _luaFunctions["update"] = _luaManager->getFunction("update");
+        _luaFunctions["draw"] = _luaManager->getFunction("draw");
         _luaFunctions["onP1Left"] = _luaManager->getFunction("on_P1_left");
         _luaFunctions["onP1Right"] = _luaManager->getFunction("on_P1_right");
         _luaFunctions["onP1Up"] = _luaManager->getFunction("on_P1_up");
@@ -101,6 +112,8 @@ namespace ware {
         _luaFunctions["onP2_1"] = _luaManager->getFunction("on_P2_1");
         _luaFunctions["onP2_2"] = _luaManager->getFunction("on_P2_2");
         _luaFunctions["onP2_3"] = _luaManager->getFunction("on_P2_3");
+        _luaFunctions["onP1Start"] = _luaManager->getFunction("on_P1_start");
+        _luaFunctions["onP2Start"] = _luaManager->getFunction("on_P2_start");
         for (const auto& func : requiredFunctions)
             if (!_luaFunctions[func].valid())
                 return 1;

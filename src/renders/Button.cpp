@@ -23,10 +23,14 @@ namespace ware {
 
     void Button::update(sf::RenderWindow& window)
     {
+    }
+
+    void Button::draw(sf::RenderWindow& window)
+    {
         window.draw(_button);
         window.draw(_text);
     }
-    
+
     void Button::disappear()
     {
         _text.setFillColor(sf::Color::Transparent);

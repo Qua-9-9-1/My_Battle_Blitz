@@ -11,6 +11,10 @@ namespace ware {
 
     void SolidColorBackground::update(sf::RenderWindow& window)
     {
+    }
+
+    void SolidColorBackground::draw(sf::RenderWindow& window)
+    {
         window.draw(_shape);
     }
 
@@ -63,6 +67,10 @@ namespace ware {
             reinitPosition(true, false);
         if (position.y <= -_textureSize.y || position.y >= _textureSize.y)
             reinitPosition(false, true);
+    }
+
+    void ScrollingBackground::draw(sf::RenderWindow& window)
+    {
         window.draw(_sprite);
     }
 
@@ -136,6 +144,10 @@ namespace ware {
 
     void ImageBackground::update(sf::RenderWindow& window)
     {
+    }
+
+    void ImageBackground::draw(sf::RenderWindow& window)
+    {
         window.draw(_sprite);
     }
 
@@ -183,6 +195,10 @@ namespace ware {
     }
 
     void ParallaxBackground::update(sf::RenderWindow& window)
+    {
+    }
+
+    void ParallaxBackground::draw(sf::RenderWindow& window)
     {
         for (const auto& sprite : _sprites) {
             window.draw(sprite);

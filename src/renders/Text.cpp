@@ -15,6 +15,10 @@ namespace ware {
 
     void Text::update(sf::RenderWindow& window)
     {
+    }
+
+    void Text::draw(sf::RenderWindow& window)
+    {
         window.draw(_text);
     }
 
