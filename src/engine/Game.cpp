@@ -23,8 +23,10 @@ Game::Game()
     _view1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     _view1.setCenter(0, 0);
     _window.setKeyRepeatEnabled(false);
-    _luaManager     = std::make_shared<LuaManager>();
+    _luaManager = std::make_shared<LuaManager>();
+    _luaManager->setGlobal("gameEngine", this);
     _luaMenuManager = std::make_shared<LuaManager>();
+    _luaMenuManager->setGlobal("gameEngine", this);
     launchMenu();
 }
 

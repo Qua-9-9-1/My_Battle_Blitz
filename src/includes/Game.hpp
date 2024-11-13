@@ -14,26 +14,33 @@
 #include "Settings.hpp"
 
 namespace ware {
+
+class LuaManager;
+
 class Game {
   public:
     Game();
     ~Game();
-    void run();
-    void handleEvents();
-    void handleOneTimeKeys();
-    void handleMutipleTimeKeys();
-    void createWindow();
-    void setOneTimeArrows(bool oneTimeArrows) { _oneTimeArrows = oneTimeArrows; }
-    void setOneTimeButtons(bool oneTimeButtons) { _oneTimeButtons = oneTimeButtons; }
-    void launchMenu();
-    void startMinigame(const std::string minigameName);
-    int  loadMinigame(const std::string minigameName);
-    void stopMinigame();
-    void separateViews();
-    void unifyViews();
-    void doInput(const std::string& input);
-    void resizeViews(int width, int height);
-    void toggleFullScreen();
+    void     run();
+    void     handleEvents();
+    void     handleOneTimeKeys();
+    void     handleMutipleTimeKeys();
+    void     createWindow();
+    void     setOneTimeArrows(bool oneTimeArrows) { _oneTimeArrows = oneTimeArrows; }
+    void     setOneTimeButtons(bool oneTimeButtons) { _oneTimeButtons = oneTimeButtons; }
+    void     launchMenu();
+    void     startMinigame(const std::string minigameName);
+    int      loadMinigame(const std::string minigameName);
+    void     stopMinigame();
+    bool     isMinigameRunning() { return _isMinigameRunning; }
+    void     setPause(bool pause) { _pause = pause; }
+    bool     isOnPause() { return _pause; }
+    Settings getSettings() { return _settings; }
+    void     separateViews();
+    void     unifyViews();
+    void     doInput(const std::string& input);
+    void     resizeViews(int width, int height);
+    void     toggleFullScreen();
 
   private:
     sf::RenderWindow                               _window;

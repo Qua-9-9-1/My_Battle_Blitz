@@ -1,6 +1,16 @@
 #include "LuaManager.hpp"
 
 namespace ware {
+void LuaManager::loadGameClass() {
+    _luaState.new_usertype<Game>(
+        "Game", sol::constructors<Game()>(), "setOneTimeArrows", &Game::setOneTimeArrows,
+        "setOneTimeButtons", &Game::setOneTimeButtons, "startMinigame", &Game::startMinigame,
+        "stopMinigame", &Game::stopMinigame, "separateViews", &Game::separateViews, "unifyViews",
+        &Game::unifyViews, "toggleFullScreen", &Game::toggleFullScreen, "isMinigameRunning",
+        &Game::isMinigameRunning, "isOnPause", &Game::isOnPause, "setPause", &Game::setPause,
+        "getSettings", &Game::getSettings);
+}
+
 void LuaManager::loadImageClass() {
     _luaState.new_usertype<Image>("Image", sol::constructors<Image(const std::string&)>(),
                                   "loadFile", &Image::loadFile, "getImage", &Image::getImage,

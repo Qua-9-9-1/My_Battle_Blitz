@@ -13,25 +13,29 @@
 #include "Renderer.hpp"
 #include "Audio.hpp"
 #include "Settings.hpp"
+#include "Game.hpp"
 
 namespace ware {
 class LuaManager {
   public:
     LuaManager();
     ~LuaManager();
-    void          loadImageClass();
-    void          loadSpriteClass();
-    void          loadTextClass();
-    void          loadButtonClass();
-    void          loadSoundClass();
-    void          loadMusicClass();
-    void          loadBackgroundClasses();
-    bool          loadScript(const std::string& scriptPath);
-    void          unloadScript();
-    sol::table    getGlobalTable();
-    sol::table    getTable(const std::string& tableName);
-    sol::function getFunction(const std::string& functionName);
-    void          setGlobal(const std::string& name, sol::object value);
+    void                       loadGameClass();
+    void                       loadImageClass();
+    void                       loadSpriteClass();
+    void                       loadTextClass();
+    void                       loadButtonClass();
+    void                       loadSoundClass();
+    void                       loadMusicClass();
+    void                       loadBackgroundClasses();
+    bool                       loadScript(const std::string& scriptPath);
+    void                       unloadScript();
+    sol::table                 getGlobalTable();
+    sol::table                 getTable(const std::string& tableName);
+    sol::function              getFunction(const std::string& functionName);
+    template <typename T> void setGlobal(const std::string& name, T&& value) {
+        _luaState[name] = sol::make_object(_luaState, std::forward<T>(value));
+    }
 
   private:
     sol::state    _luaState;

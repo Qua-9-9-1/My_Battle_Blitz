@@ -81,16 +81,6 @@ int Game::loadMinigame(const std::string minigameName) {
         std::cerr << "Error initializing game: " << e.what() << std::endl;
         return 1;
     }
-    auto SeparateViews = _luaManager->getFunction("separate_views");
-    if (!SeparateViews.valid()) {
-        std::cerr << "Failed to get Lua function separateViews" << std::endl;
-        return 1;
-    }
-    if (SeparateViews()) {
-        separateViews();
-    } else {
-        unifyViews();
-    }
     _luaFunctions["update"]    = _luaManager->getFunction("update");
     _luaFunctions["draw"]      = _luaManager->getFunction("draw");
     _luaFunctions["onP1Left"]  = _luaManager->getFunction("on_P1_left");
