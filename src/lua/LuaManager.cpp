@@ -12,6 +12,10 @@ LuaManager::LuaManager() {
     _luaState = sol::state();
     _luaState.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string, sol::lib::package);
     _luaState.new_usertype<sf::RenderWindow>("RenderWindow", "close", &sf::RenderWindow::close);
+    _luaState.new_usertype<Settings>("Settings", "fullScreen", &Settings::fullScreen, "musicVolume",
+                                     &Settings::musicVolume, "soundVolume", &Settings::soundVolume,
+                                     "graphics", &Settings::graphics, "language",
+                                     &Settings::language, "beginnerMode", &Settings::beginnerMode);
     loadImageClass();
     loadSpriteClass();
     loadTextClass();

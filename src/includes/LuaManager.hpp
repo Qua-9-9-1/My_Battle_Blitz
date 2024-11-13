@@ -12,6 +12,7 @@
 #include "LuaManager.hpp"
 #include "Renderer.hpp"
 #include "Audio.hpp"
+#include "Settings.hpp"
 
 namespace ware {
 class LuaManager {
