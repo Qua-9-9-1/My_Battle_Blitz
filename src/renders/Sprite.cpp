@@ -22,7 +22,7 @@ namespace ware {
         _sprite.setTexture(_texture);
     }
 
-    void Sprite::update(sf::RenderWindow& window)
+    void Sprite::update()
     {
     }
 

@@ -18,9 +18,8 @@ namespace ware {
         setLoop(true);
     }
 
-    void Music::update(sf::RenderWindow& window)
+    void Music::update()
     {
-        (void)window;
         if (!isPlaying())
             replay();
     }

@@ -14,7 +14,7 @@ namespace ware {
     class AAudio : public IObject {
         public:
             virtual ~AAudio() = default;
-            void update(sf::RenderWindow& window) override = 0;
+            void update() override = 0;
             virtual void play() = 0;
             virtual void stop() = 0;
             virtual void loadFile(const std::string filePath) = 0;
@@ -29,7 +29,7 @@ namespace ware {
         public:
             Sound(const std::string filePath);
             ~Sound();
-            void update(sf::RenderWindow& window) override;
+            void update() override;
             void play() override;
             void stop() override;
             void loadFile(const std::string filePath) override;
@@ -44,7 +44,7 @@ namespace ware {
         public:
             Music(const std::string filePath);
             ~Music();
-            void update(sf::RenderWindow& window) override;
+            void update() override;
             void play() override;
             void stop() override;
             void replay();

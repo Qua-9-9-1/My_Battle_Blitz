@@ -21,7 +21,7 @@ namespace ware {
     {
     }
 
-    void Button::update(sf::RenderWindow& window)
+    void Button::update()
     {
     }
 

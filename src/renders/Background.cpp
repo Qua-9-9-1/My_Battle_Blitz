@@ -9,7 +9,7 @@ namespace ware {
         _shape.setFillColor(sf::Color(r, g, b, a));
     }
 
-    void SolidColorBackground::update(sf::RenderWindow& window)
+    void SolidColorBackground::update()
     {
     }
 
@@ -56,7 +56,7 @@ namespace ware {
         setDirection(45);
     }
 
-    void ScrollingBackground::update(sf::RenderWindow& window)
+    void ScrollingBackground::update()
     {
         _sprite.move(_speed * cos(_angle), _speed * sin(_angle));
         sf::Vector2f position = _sprite.getPosition();
@@ -142,7 +142,7 @@ namespace ware {
         _rect = _sprite.getTextureRect();
     }
 
-    void ImageBackground::update(sf::RenderWindow& window)
+    void ImageBackground::update()
     {
     }
 
@@ -189,12 +189,12 @@ namespace ware {
 
     ParallaxBackground::ParallaxBackground(sf::Image image, int layers)
     {
-        if (layers = 0) return;
+        if (layers == 0) return;
         _texture.loadFromImage(image);
         _texture.setSmooth(true);
     }
 
-    void ParallaxBackground::update(sf::RenderWindow& window)
+    void ParallaxBackground::update()
     {
     }
 
@@ -214,6 +214,8 @@ namespace ware {
 
     void ParallaxBackground::setSize(float x, float y)
     {
+        (void)x;
+        (void)y;
     }
 
     void ParallaxBackground::setScale(float x, float y)
@@ -232,7 +234,7 @@ namespace ware {
 
     void ParallaxBackground::setSpeed(int layer, float speed)
     {
-        if (layer < 0 || layer > _sprites.size()) return;
+        if (layer < 0 || layer > (int)(_sprites.size())) return;
         _speeds[layer] = speed;
     }
 

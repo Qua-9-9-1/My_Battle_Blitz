@@ -13,6 +13,6 @@ namespace ware {
     class IObject {
         public:
             virtual ~IObject() = default;
-            virtual void update(sf::RenderWindow& window) = 0;
+            virtual void update() = 0;
     };
 }

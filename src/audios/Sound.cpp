@@ -10,9 +10,8 @@ namespace ware {
     {
     }
 
-    void Sound::update(sf::RenderWindow& window)
+    void Sound::update()
     {
-        (void)window;
     }
 
     void Sound::loadFile(const std::string filePath)

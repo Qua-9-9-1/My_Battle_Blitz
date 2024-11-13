@@ -19,9 +19,8 @@ namespace ware {
     {
     }
 
-    void Player::update(sf::RenderWindow& window)
+    void Player::update()
     {
-        (void)window;
     }
 
     void Player::setPlayer(int score, sf::Color skinColor, sf::Color clothesColor)

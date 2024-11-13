@@ -12,14 +12,14 @@ namespace ware {
     _clock(),
     _view1(),
     _view2(),
-    _fullScreen(false),
-    _deltaTime(0),
     _isMinigameRunning(false),
     _oneTimeArrows(true),
     _oneTimeButtons(true),
     _pause(false),
     _separatedViews(false)
     {
+        _fullScreen = false;
+        _deltaTime = 0;
         createWindow();
         _view1.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         _view1.setCenter(0, 0);

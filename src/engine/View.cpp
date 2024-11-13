@@ -10,9 +10,8 @@ namespace ware {
     {   
     }
 
-    void View::update(sf::RenderWindow& window)
+    void View::update()
     {
-        (void)window;
     }
 
     void View::setPosition(float x, float y)

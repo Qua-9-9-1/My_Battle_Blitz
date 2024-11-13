@@ -13,7 +13,7 @@ namespace ware {
     {
     }
 
-    void Text::update(sf::RenderWindow& window)
+    void Text::update()
     {
     }
 

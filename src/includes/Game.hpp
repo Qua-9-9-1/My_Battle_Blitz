@@ -47,8 +47,8 @@ namespace ware {
             bool                                            _separatedViews;
             bool                                            _fullScreen;
             std::shared_ptr<LuaManager>                     _luaManager;
-            std::unordered_map<std::string, sol::function> _luaFunctions;
-            std::shared_ptr<LuaManager>                    _luaMenuManager;
-            std::unordered_map<std::string, sol::function> _luaMenuFunctions;            
+            std::unordered_map<std::string, sol::function>  _luaFunctions;
+            std::shared_ptr<LuaManager>                     _luaMenuManager;
+            std::unordered_map<std::string, sol::function>  _luaMenuFunctions;            
     };
 }

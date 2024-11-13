@@ -6,7 +6,7 @@ namespace ware {
         public:
             View();
             ~View();
-            void update(sf::RenderWindow& window);
+            void update();
             sf::View getView() { return _view; }
             void setPosition(float x, float y);
             void setScale(float x, float y);
