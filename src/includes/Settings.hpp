@@ -1,3 +1,5 @@
+#pragma once
+
 namespace ware {
 enum Graphics {
     LOW,
@@ -17,6 +19,7 @@ enum Language {
 
 class Settings {
   public:
+    bool isFullScreen;
     bool fullScreen;
     int  musicVolume;
     int  soundVolume;

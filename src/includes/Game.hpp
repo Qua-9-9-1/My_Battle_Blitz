@@ -33,6 +33,7 @@ class Game {
     void unifyViews();
     void doInput(const std::string& input);
     void resizeViews(int width, int height);
+    void toggleFullScreen();
 
   private:
     sf::RenderWindow                               _window;

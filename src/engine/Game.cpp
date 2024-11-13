@@ -11,6 +11,7 @@ namespace ware {
 Game::Game()
     : _clock(), _view1(), _view2(), _isMinigameRunning(false), _oneTimeArrows(true),
       _oneTimeButtons(true), _pause(false), _separatedViews(false) {
+    _settings.isFullScreen = false;
     _settings.fullScreen   = false;
     _settings.musicVolume  = 100;
     _settings.soundVolume  = 100;
@@ -35,6 +36,9 @@ void Game::run() {
         _deltaTime = _clock.restart().asSeconds();
         _window.clear();
         _window.setView(_view1.getView());
+        if (_settings.fullScreen != _settings.isFullScreen) {
+            toggleFullScreen();
+        }
         _luaMenuFunctions["update"](_window, _deltaTime, _settings);
         if (_isMinigameRunning) {
             _luaFunctions["update"](_deltaTime);
@@ -64,5 +68,19 @@ void Game::createWindow() {
     _window.setFramerateLimit(60);
     _window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     _window.setMouseCursorVisible(false);
+}
+
+void Game::toggleFullScreen() {
+
+    sf::VideoMode videoMode;
+    if (_settings.fullScreen) {
+        _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames",
+                       sf::Style::Fullscreen);
+    } else {
+        _window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "my_MicroGames");
+    }
+    _window.setFramerateLimit(60);
+    _window.setMouseCursorVisible(false);
+    _settings.isFullScreen = _settings.fullScreen;
 }
 } // namespace ware
