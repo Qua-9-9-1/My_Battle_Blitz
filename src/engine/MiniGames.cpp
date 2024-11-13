@@ -64,7 +64,7 @@ int Game::loadMinigame(const std::string minigameName) {
                                                   "onP1_3", "onP2_1",   "onP2_2",   "onP2_3"};
 
     _luaFunctions.clear();
-    _luaManager->loadScript("scripts/" + minigameName + "/handler.lua");
+    _luaManager->loadScript("scripts/minigames/" + minigameName + "/handler.lua");
     auto InitFunction = _luaManager->getFunction("init");
     if (!InitFunction.valid()) {
         std::cerr << "Failed to get Lua function init" << std::endl;
