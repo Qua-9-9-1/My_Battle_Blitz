@@ -8,6 +8,7 @@
 #pragma once
 
 #include <sol/sol.hpp>
+#include <SFML/Graphics.hpp>
 #include "LuaManager.hpp"
 #include "Renderer.hpp"
 #include "Audio.hpp"

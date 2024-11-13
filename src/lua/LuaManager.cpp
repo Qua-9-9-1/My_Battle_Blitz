@@ -12,6 +12,9 @@ namespace ware {
     {
         _luaState = sol::state();
         _luaState.open_libraries(sol::lib::base, sol::lib::math, sol::lib::string, sol::lib::package);
+        _luaState.new_usertype<sf::RenderWindow>("RenderWindow",
+            "close", &sf::RenderWindow::close
+        );
         loadImageClass();
         loadSpriteClass();
         loadTextClass();
