@@ -10,9 +10,9 @@
 #include <SFML/Graphics.hpp>
 
 namespace ware {
-    class IObject {
-        public:
-            virtual ~IObject() = default;
-            virtual void update() = 0;
-    };
-}
+class IObject {
+  public:
+    virtual ~IObject()    = default;
+    virtual void update() = 0;
+};
+} // namespace ware

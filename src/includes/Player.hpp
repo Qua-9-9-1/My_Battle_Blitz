@@ -10,19 +10,20 @@
 #include <SFML/Graphics.hpp>
 
 namespace ware {
-    class Player {
-        public:
-            Player();
-            ~Player();
-            void update();
-            sf::Color getSkinColor() { return _skinColor; }
-            sf::Color getClothesColor() { return _clothesColor; }
-            int getScore() { return _score; }
-            void setPlayer(int score, sf::Color skinColor, sf::Color clothesColor);
-            void setPosition(sf::Vector2f position);
-        private:
-            int         _score;
-            sf::Color   _skinColor;
-            sf::Color   _clothesColor;
-    };
-}
+class Player {
+  public:
+    Player();
+    ~Player();
+    void      update();
+    sf::Color getSkinColor() { return _skinColor; }
+    sf::Color getClothesColor() { return _clothesColor; }
+    int       getScore() { return _score; }
+    void      setPlayer(int score, sf::Color skinColor, sf::Color clothesColor);
+    void      setPosition(sf::Vector2f position);
+
+  private:
+    int       _score;
+    sf::Color _skinColor;
+    sf::Color _clothesColor;
+};
+} // namespace ware

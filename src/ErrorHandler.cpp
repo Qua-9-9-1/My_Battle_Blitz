@@ -7,17 +7,12 @@
 
 #include "ErrorHandler.hpp"
 
-const std::string textures[TEXTURES_SIZE] = {
-    "judge",
-    "parking",
-    "mario"
-};
+const std::string textures[TEXTURES_SIZE] = {"judge", "parking", "mario"};
 
-void errorHandler(void)
-{
+void errorHandler(void) {
     std::ifstream file;
-    bool error = false;
-    std::string basePath = std::filesystem::current_path().string() + "/assets/sprites/";
+    bool          error    = false;
+    std::string   basePath = std::filesystem::current_path().string() + "/assets/sprites/";
 
     for (int i = 0; i < TEXTURES_SIZE; i++) {
         file.open(basePath + textures[i] + ".png");
@@ -28,5 +23,6 @@ void errorHandler(void)
         }
         file.close();
     }
-    if (error) exit(1);
+    if (error)
+        exit(1);
 }
