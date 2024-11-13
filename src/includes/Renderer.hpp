@@ -77,6 +77,7 @@ class Text : public ARenderer {
     void setScale(float x, float y) override;
     void setRotation(float angle) override;
     void rotate(float angle);
+    void center();
     void setColor(float r, float g, float b, float a);
     void setBorderColor(float r, float g, float b, float a);
     void setBorderThickness(float thickness);

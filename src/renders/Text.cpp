@@ -5,7 +5,7 @@ namespace ware {
 Text::Text(const std::string text, const std::string fontPath) {
     loadFile(fontPath);
     setString(text);
-    _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
+    center();
 }
 
 Text::~Text() {}
@@ -25,11 +25,18 @@ void Text::setPosition(float x, float y) { _text.setPosition(x, y); }
 
 void Text::move(float x, float y) { _text.move(x, y); }
 
-void Text::setScale(float x, float y) { _text.setScale(x, y); }
+void Text::setScale(float x, float y) {
+    _text.setScale(x, y);
+    center();
+}
 
 void Text::setRotation(float angle) { _text.setRotation(angle); }
 
 void Text::rotate(float angle) { _text.rotate(angle); }
+
+void Text::center() {
+    _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
+}
 
 void Text::setColor(float r, float g, float b, float a) {
     _text.setFillColor(sf::Color(r, g, b, a));
@@ -43,7 +50,7 @@ void Text::setBorderThickness(float thickness) { _text.setOutlineThickness(thick
 
 void Text::setString(const std::string text) {
     _text.setString(text);
-    _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
+    center();
 }
 
 void Text::setCharacterSize(int size) { _text.setCharacterSize(size); }
