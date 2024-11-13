@@ -16,6 +16,7 @@ LuaManager::LuaManager() {
                                      &Settings::musicVolume, "soundVolume", &Settings::soundVolume,
                                      "graphics", &Settings::graphics, "language",
                                      &Settings::language, "beginnerMode", &Settings::beginnerMode);
+    loadGameClass();
     loadImageClass();
     loadSpriteClass();
     loadTextClass();
@@ -60,5 +61,4 @@ sol::function LuaManager::getFunction(const std::string& functionName) {
     return function;
 }
 
-void LuaManager::setGlobal(const std::string& name, sol::object value) { _luaState[name] = value; }
 } // namespace ware

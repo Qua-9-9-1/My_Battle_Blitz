@@ -8,15 +8,16 @@
 local WINDOW_WIDTH = 800
 local WINDOW_HEIGHT = 600
 local main_menu = require("scripts/game_menu/main_menu")
-local controls = require("scripts/game_menu/controls")
+local settings = require("scripts/game_menu/settings")
+local credits = require("scripts/game_menu/credits")
 
 local menu_location = {
     main_menu = 0,
     showdown = 1,
     freeplay = 2,
-    controls = 3,
-    settings = 4,
-    credits = 5,
+    settings = 3,
+    credits = 4,
+    minigame = 5
 };
 
 local miniGame = {
@@ -40,6 +41,10 @@ function init(version)
     miniGame.music:play();
     miniGame.music:setReplayPoint(6);
     main_menu.init(version);
+    -- showdown.init();
+    -- freeplay.init();
+    settings.init();
+    credits.init();
     return true;
 end
 
@@ -47,15 +52,23 @@ function pauseMenu()
     print("pause");
 end
 
-function update(window, deltaTime)
+function update(window, deltaTime, game_settings)
     if (miniGame.p1_pause or miniGame.p2_pause) then
         return;
     end
-    miniGame.background:update();
-    miniGame.background:draw(window);
-    miniGame.music:update();
+    print(gameEngine:isMinigameRunning());
+    if (miniGame.location ~= menu_location.showdown and
+        miniGame.location ~= menu_location.credits) then
+        miniGame.background:update();
+        miniGame.background:draw(window);
+        miniGame.music:update();
+    end
     if miniGame.location == menu_location.main_menu then
-        main_menu.update(window);
+        main_menu.update(window, deltaTime);
+    elseif miniGame.location == menu_location.credits then
+        credits.update(window, deltaTime);
+    elseif miniGame.location == menu_location.settings then
+        settings.update(window, deltaTime, game_settings);
     end
     return;
 end
@@ -72,6 +85,12 @@ function on_P1_left()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(false);
+    elseif miniGame.location == menu_location.showdown then
+        print("P1 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P1 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.change_option(false);
     end
     return;
 end
@@ -84,6 +103,12 @@ function on_P1_right()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(true);
+    elseif miniGame.location == menu_location.showdown then
+        print("P1 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P1 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.change_option(true);
     end
     return;
 end
@@ -96,6 +121,12 @@ function on_P1_up()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(false);
+    elseif miniGame.location == menu_location.showdown then
+        print("P1 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P1 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.iter_option(false);
     end
     return;
 end
@@ -108,6 +139,12 @@ function on_P1_down()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(true);
+    elseif miniGame.location == menu_location.showdown then
+        print("P1 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P1 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.iter_option(true);
     end
     return;
 end
@@ -119,7 +156,14 @@ function on_P1_1()
         return
     end
     if miniGame.location == menu_location.main_menu then
-        main_menu.select_button();
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.showdown then
+        print("start minigame");
+        gameEngine:startMiniGame("thumb_wrestling");
+    elseif miniGame.location == menu_location.credits then
+        credits.accelerate();
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
     end
     return;
 end
@@ -130,7 +174,13 @@ function on_P1_2()
     or block_action() then
         return
     end
-    print("P1 action")
+    if miniGame.location == menu_location.main_menu then
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.credits then
+        credits.quit(miniGame);
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
+    end
     return;
 end
 
@@ -140,7 +190,11 @@ function on_P1_3()
     or block_action() then
         return
     end
-    print("P1 action")
+    if miniGame.location == menu_location.main_menu then
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
+    end
     return;
 end
 
@@ -169,6 +223,12 @@ function on_P2_left()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(false);
+    elseif miniGame.location == menu_location.showdown then
+        print("P2 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P2 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.change_option(false);
     end
     return;
 end
@@ -181,6 +241,12 @@ function on_P2_right()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(true);
+    elseif miniGame.location == menu_location.showdown then
+        print("P2 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P2 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.change_option(true);
     end
     return;
 end
@@ -193,6 +259,12 @@ function on_P2_up()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(false);
+    elseif miniGame.location == menu_location.showdown then
+        print("P2 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P2 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.iter_option(false);
     end
     return;
 end
@@ -205,6 +277,12 @@ function on_P2_down()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(true);
+    elseif miniGame.location == menu_location.showdown then
+        print("P2 action");
+    elseif miniGame.location == menu_location.freeplay then
+        print("P2 action");
+    elseif miniGame.location == menu_location.settings then
+        settings.iter_option(true);
     end
     return;
 end
@@ -215,8 +293,13 @@ function on_P2_1()
     or block_action() then
         return
     end
-
-    print("P2 action")
+    if miniGame.location == menu_location.main_menu then
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.credits then
+        credits.accelerate();
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
+    end
     return;
 end
 
@@ -226,9 +309,13 @@ function on_P2_2()
     or block_action() then
         return
     end
-
-
-    print("P2 action")
+    if miniGame.location == menu_location.main_menu then
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.credits then
+        credits.quit(miniGame);
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
+    end
     return;
 end
 
@@ -238,8 +325,11 @@ function on_P2_3()
     or block_action() then
         return
     end
-
-    print("P2 action")
+    if miniGame.location == menu_location.main_menu then
+        main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.settings then
+        settings.press();
+    end
     return;
 end
 

@@ -18,7 +18,7 @@ function buttons_init()
         Button.new("CREDITS", "assets/font/Mario-Kart-DS.ttf", 200, 200),
         Button.new("QUIT", "assets/font/Mario-Kart-DS.ttf", 200, 200)
     }
-    for i = 1, 6 do
+    for i = 1, #objects.buttons do
         if i < 4 then
             objects.buttons[i]:setTextSize(70)
             objects.buttons[i]:setSize(480, 100)
@@ -39,6 +39,8 @@ function buttons_init()
     objects.buttons[6]:setBorderColor(220, 0, 0, 255)
     objects.buttons[6]:setTextColor(220, 0, 0, 255)
     objects.buttons[6]:setPosition(650, 570)
+    objects.buttons[objects.selected_button]:setBorderColor(255, 255, 50, 255);
+    objects.buttons[objects.selected_button]:setTextColor(255, 255, 50, 255);
 end
 
 function main_menu.init(version)
@@ -51,14 +53,12 @@ function main_menu.init(version)
 end
 
 function draw_buttons(window)
-    for i = 1, 6 do
+    for i = 1, #objects.buttons do
         objects.buttons[i]:draw(window);
     end
-    objects.buttons[objects.selected_button]:setBorderColor(255, 255, 50, 255);
-    objects.buttons[objects.selected_button]:setTextColor(255, 255, 50, 255);
 end
 
-function main_menu.update(window)
+function main_menu.update(window, deltaTime)
     objects.version_text:draw(window);
     draw_buttons(window);
     if objects.quit then
@@ -76,33 +76,39 @@ function main_menu.iter_button(next)
         objects.buttons[objects.selected_button]:setTextColor(255, 255, 255, 255);
     end
     if next then
-        objects.selected_button = objects.selected_button + 1        
+        objects.selected_button = objects.selected_button + 1     
         if objects.selected_button == #objects.buttons + 1 then
-            objects.selected_button = 1
+            objects.selected_button = 1;
         end
     else
         objects.selected_button = objects.selected_button - 1
         if objects.selected_button == 0 then
-            objects.selected_button = #objects.buttons 
+            objects.selected_button = #objects.buttons;
         end
     end
+    objects.buttons[objects.selected_button]:setBorderColor(255, 255, 50, 255);
+    objects.buttons[objects.selected_button]:setTextColor(255, 255, 50, 255);
 end
 
-function main_menu.select_button()
-    objects.select_sound:play();
+function main_menu.select_button(miniGame)
     if objects.selected_button == 1 then
         print("showdown");
     elseif objects.selected_button == 2 then
-        print("freeplay");
+        miniGame.location = 2;
     elseif objects.selected_button == 3 then
         print("controls");
     elseif objects.selected_button == 4 then
-        print("settings");
+        miniGame.location = 3;
     elseif objects.selected_button == 5 then
-        print("credits");
+        miniGame.location = 4;
     elseif objects.selected_button == 6 then
         objects.quit = true;
     end
+    objects.select_sound:play();
 end
         
+function close_menu()
+    objects.quit = true;
+end
+
 return main_menu
