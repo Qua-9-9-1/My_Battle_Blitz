@@ -10,8 +10,8 @@ local objects = {
 
 function freeplay.init()
     game_list = {
-        new.Text("thumb", "assets/font/Early_GameBoy.ttf");
-        new.Text("judge", "assets/font/Early_GameBoy.ttf");
+        Text.new("thumb", "assets/font/Early_GameBoy.ttf");
+        Text.new("judge", "assets/font/Early_GameBoy.ttf");
     }
     for i = 1, #game_list do
         game_list[i]:setColor(255, 255, 255, 255);
@@ -27,3 +27,4 @@ function freeplay.update(window, deltaTime)
     end
 end
 
+return freeplay

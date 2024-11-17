@@ -8,6 +8,7 @@
 local WINDOW_WIDTH = 800
 local WINDOW_HEIGHT = 600
 local main_menu = require("scripts/game_menu/main_menu")
+local freeplay = require("scripts/game_menu/freeplay")
 local settings = require("scripts/game_menu/settings")
 local credits = require("scripts/game_menu/credits")
 
@@ -42,7 +43,7 @@ function init(version)
     miniGame.music:setReplayPoint(6);
     main_menu.init(version);
     -- showdown.init();
-    -- freeplay.init();
+    freeplay.init();
     settings.init();
     credits.init();
     return true;
@@ -53,10 +54,9 @@ function pauseMenu()
 end
 
 function update(window, deltaTime, game_settings)
-    if (miniGame.p1_pause or miniGame.p2_pause) then
+    if gameEngine:isMinigameRunning() then
         return;
     end
-    print(gameEngine:isMinigameRunning());
     if (miniGame.location ~= menu_location.showdown and
         miniGame.location ~= menu_location.credits) then
         miniGame.background:update();
@@ -65,6 +65,8 @@ function update(window, deltaTime, game_settings)
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.update(window, deltaTime);
+    elseif miniGame.location == menu_location.freeplay then
+        freeplay.update(window, deltaTime);
     elseif miniGame.location == menu_location.credits then
         credits.update(window, deltaTime);
     elseif miniGame.location == menu_location.settings then
@@ -140,7 +142,7 @@ function on_P1_down()
     if miniGame.location == menu_location.main_menu then
         main_menu.iter_button(true);
     elseif miniGame.location == menu_location.showdown then
-        print("P1 action");
+        print("showdown P1 action");
     elseif miniGame.location == menu_location.freeplay then
         print("P1 action");
     elseif miniGame.location == menu_location.settings then
@@ -157,13 +159,15 @@ function on_P1_1()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.select_button(miniGame);
-    elseif miniGame.location == menu_location.showdown then
+    elseif miniGame.location == menu_location.freeplay then
         print("start minigame");
-        gameEngine:startMiniGame("thumb_wrestling");
+        miniGame.music:fadeOut(1);
+        gameEngine:startMinigame("thumb_wrestling");
+        print("minigame started");
     elseif miniGame.location == menu_location.credits then
         credits.accelerate();
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end
@@ -176,10 +180,12 @@ function on_P1_2()
     end
     if miniGame.location == menu_location.main_menu then
         main_menu.select_button(miniGame);
+    elseif miniGame.location == menu_location.freeplay then
+        miniGame.music:fadeOut(1);
     elseif miniGame.location == menu_location.credits then
         credits.quit(miniGame);
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end
@@ -193,7 +199,7 @@ function on_P1_3()
     if miniGame.location == menu_location.main_menu then
         main_menu.select_button(miniGame);
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end
@@ -298,7 +304,7 @@ function on_P2_1()
     elseif miniGame.location == menu_location.credits then
         credits.accelerate();
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end
@@ -314,7 +320,7 @@ function on_P2_2()
     elseif miniGame.location == menu_location.credits then
         credits.quit(miniGame);
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end
@@ -328,7 +334,7 @@ function on_P2_3()
     if miniGame.location == menu_location.main_menu then
         main_menu.select_button(miniGame);
     elseif miniGame.location == menu_location.settings then
-        settings.press();
+        settings.press(miniGame);
     end
     return;
 end

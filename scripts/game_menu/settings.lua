@@ -198,8 +198,8 @@ function settings.change_option(next)
     end
 end
 
-function settings.press()
-    print("draw_options");
+function settings.press(miniGame)
+    miniGame.location = 0;
 end
         
 return settings
