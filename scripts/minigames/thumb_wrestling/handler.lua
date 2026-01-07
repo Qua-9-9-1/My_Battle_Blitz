@@ -1,14 +1,19 @@
 
+local game = require("scripts/minigames/thumb_wrestling/game")
+
 function init()
     gameEngine:setOneTimeButtons(false);
+    game.init();
     return true;
 end
 
 function update(window, deltaTime)
+    game.update(deltaTime);
     return;
 end
 
 function draw(window)
+    game.draw(window);
     return;
 end
 
@@ -29,10 +34,12 @@ function on_P1_down()
 end
 
 function on_P1_1()
+    game.P1_press();
     return;
 end
 
 function on_P1_2()
+    game.P1_feint();
     return;
 end
 
@@ -62,10 +69,12 @@ function on_P2_down()
 end
 
 function on_P2_1()
+    game.P2_press();
     return;
 end
 
 function on_P2_2()
+    game.P2_feint();
     return;
 end
 
