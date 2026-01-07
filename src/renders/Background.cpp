@@ -38,7 +38,7 @@ ScrollingBackground::ScrollingBackground(sf::Image image) {
 }
 
 void ScrollingBackground::update() {
-    _sprite.move(_speed * cos(_angle), _speed * sin(_angle));
+    _sprite.move(_speed * std::cos(_angle), _speed * std::sin(_angle));
     sf::Vector2f position = _sprite.getPosition();
     position.x += WINDOW_WIDTH / 2;
     position.y += WINDOW_HEIGHT / 2;
@@ -91,7 +91,7 @@ void ScrollingBackground::setSpeed(float speed) {
 }
 
 void ScrollingBackground::setDirection(float angle) {
-    _angle = angle * (M_PI / 180);
+    _angle = angle * (std::numbers::pi / 180);
     reinitPosition(true, true);
 }
 

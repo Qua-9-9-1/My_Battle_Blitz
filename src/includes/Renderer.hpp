@@ -10,6 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include "IObject.hpp"
 #include "Utils.hpp"
+#include <numbers>
 #include <cmath>
 
 namespace ware {
