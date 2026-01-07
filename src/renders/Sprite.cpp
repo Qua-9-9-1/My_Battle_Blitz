@@ -38,6 +38,8 @@ void Sprite::setTextureRect(int start_x, int start_y, int width, int height) {
     _sprite.setTextureRect(sf::IntRect(start_x, start_y, width, height));
 }
 
+void Sprite::setSmooth(bool smooth) { _texture.setSmooth(smooth); }
+
 void Sprite::setColor(sf::Color color) { _sprite.setColor(color); }
 
 void Sprite::flip(bool left) {

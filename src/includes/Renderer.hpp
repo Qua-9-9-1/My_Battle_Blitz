@@ -54,6 +54,7 @@ class Sprite : public ARenderer {
     void setRotation(float angle) override;
     void rotate(float angle);
     void setTextureRect(int start_x, int start_y, int width, int height);
+    void setSmooth(bool smooth);
     void setColor(sf::Color color);
     void setPlayerColor(sf::Color skinColor, sf::Color clothesColor);
     void flip(bool invert);

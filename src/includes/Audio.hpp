@@ -39,6 +39,7 @@ class Sound : public AAudio {
   private:
     sf::Sound       _sound;
     sf::SoundBuffer _buffer;
+    float           _volume;
 };
 
 class Music : public AAudio {
@@ -48,6 +49,7 @@ class Music : public AAudio {
     void update() override;
     void play() override;
     void stop() override;
+    void fadeOut(float duration);
     void replay();
     void setReplayPoint(float seconds);
     bool isPlaying();
@@ -59,5 +61,9 @@ class Music : public AAudio {
   private:
     sf::Music _music;
     sf::Time  _replayPoint;
+    float     _volume;
+    bool      _fadeOut;
+    float     _fadeOutDuration;
+    bool      _stopped;
 };
 } // namespace ware

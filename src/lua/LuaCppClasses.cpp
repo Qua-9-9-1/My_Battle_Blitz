@@ -25,7 +25,7 @@ void LuaManager::loadSpriteClass() {
         &Sprite::update, "draw", &Sprite::draw, "disappear", &Sprite::disappear, "setPosition",
         &Sprite::setPosition, "move", &Sprite::move, "setScale", &Sprite::setScale, "setRotation",
         &Sprite::setRotation, "rotate", &Sprite::rotate, "setTextureRect", &Sprite::setTextureRect,
-        "setColor", &Sprite::setColor, "flip", &Sprite::flip);
+        "setSmooth", &Sprite::setSmooth, "setColor", &Sprite::setColor, "flip", &Sprite::flip);
 }
 
 void LuaManager::loadTextClass() {
@@ -61,7 +61,8 @@ void LuaManager::loadMusicClass() {
     _luaState.new_usertype<Music>(
         "Music", sol::constructors<Music(const std::string&)>(), "loadFile", &Music::loadFile,
         "update", &Music::update, "play", &Music::play, "replay", &Music::replay, "stop",
-        &Music::stop, "isPlaying", &Music::isPlaying, "setReplayPoint", &Music::setReplayPoint);
+        &Music::stop, "fadeOut", &Music::fadeOut, "setVolume", &Music::setVolume, "setPitch",
+        &Music::setPitch, "isPlaying", &Music::isPlaying, "setReplayPoint", &Music::setReplayPoint);
 }
 
 void LuaManager::loadBackgroundClasses() {
